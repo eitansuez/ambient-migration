@@ -157,15 +157,27 @@ Create the namespace where the Gateway is to be provisioned:
 kubectl create ns istio-ingress
 ```
 
-Apply the gateway resource:
+Review the Gateway configuration:
+
+```yaml title="gateway.yaml" linenums="1"
+--8<-- "gateway.yaml"
+```
+
+The gateway is configured to allow the binding of routes defined in the namespace `frontend`.
+
+Apply the Gateway resource:
 
 ```shell
 kubectl apply -f artifacts/gateway.yaml -n istio-ingress
 ```
 
-The gateway is configured to allow the binding of routes defined in the namespace `frontend`.
-
 Next, define an `HTTPRoute` to expose specific endpoints on the `productpage` service through the gateway:
+
+```yaml title="ingress-route.yaml" linenums="1"
+--8<-- "ingress-route.yaml"
+```
+
+Apply the HTTPRoute:
 
 ```shell
 kubectl apply -f artifacts/ingress-route.yaml -n frontend
@@ -196,10 +208,26 @@ You will apply three AuthorizationPolicy resources that establish the following 
 
 Furthermore:
 
-1. the first policy will be a layer 4 policy that is concerned strictly with workload identity.
-2. the remaining policies have layer 7 aspects that allows only specific HTTP methods (for example, GET or POST)
+1. The first policy will be a layer 4 policy that is concerned strictly with workload identity.
+2. The remaining policies have layer 7 aspects that allows only specific HTTP methods (for example, GET or POST).
 
-Review and apply all three policies:
+Review all three policies:
+
+```yaml title="productpage-authz.yaml" linenums="1"
+--8<-- "productpage-authz.yaml"
+```
+
+Note how the identity of the allowed caller is specified via the Istio spiffe id which is a function of the workload's location (namespace) and service account.
+
+```yaml title="ratings-authz.yaml" linenums="1"
+--8<-- "ratings-authz.yaml"
+```
+
+```yaml title="details-authz.yaml" linenums="1"
+--8<-- "details-authz.yaml"
+```
+
+Apply all three policies:
 
 ```shell
 kubectl apply -f artifacts/productpage-authz.yaml -n frontend
@@ -212,8 +240,6 @@ kubectl apply -f artifacts/ratings-authz.yaml -n backend
 ```shell
 kubectl apply -f artifacts/details-authz.yaml -n backend
 ```
-
-Note how the identity of the allowed caller is specified via the Istio spiffe id which is a function of the workload's service account.
 
 ### Validate
 
@@ -233,7 +259,7 @@ Note how the identity of the allowed caller is specified via the Istio spiffe id
 
     It should produce a `HTTP/1.1 403 Forbidden` response.
 
-2. A request from an unauthorized workload to the `details` service should be denied:
+3. A request from an unauthorized workload to the `details` service should be denied:
 
     ```shell
     kubectl exec deploy/curl -n frontend -- \
@@ -251,13 +277,19 @@ Note how the identity of the allowed caller is specified via the Istio spiffe id
 
 When `productpage` makes requests against the `reviews` service, the requests are load-balanced across all three versions of the service.
 
-Verify this by making several requests to the `productpage` service and "grepping" for the keyword "reviews":
+Verify this by making several requests to the `productpage` service and "grepping" for the keyword "reviews-":
 
 ```shell
 curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
 ```
 
-Apply a policy that will route all requests to `reviews-v3`:
+Review the following traffic policy which will route all requests to `reviews-v3`:
+
+```yaml title="route-reviews-v3.yaml" linenums="1"
+--8<-- "route-reviews-v3.yaml"
+```
+
+Apply the policy:
 
 ```shell
 kubectl apply -f artifacts/route-reviews-v3.yaml -n backend
