@@ -1,0 +1,33 @@
+site_name: Migrating from Sidecars to Ambient Mesh
+site_url: https://eitansuez.github.io/ambient-migration
+repo_url: https://github.com/eitansuez/ambient-migration
+theme:
+  name: material
+  features:
+  - navigation.top
+  - navigation.instant
+  - navigation.tracking
+  - navigation.footer
+  - navigation.expand
+  - content.code.annotate
+  - content.code.copy
+  palette:
+    primary: blue grey
+nav:
+- index.md
+- setup.md
+markdown_extensions:
+- admonition
+- pymdownx.details
+- pymdownx.superfences
+- pymdownx.highlight:
+    anchor_linenums: true
+    line_spans: __span
+    pygments_lang_class: true
+- pymdownx.inlinehilite
+- pymdownx.snippets:
+    base_path: artifacts
+    check_paths: true
+- attr_list
+- pymdownx.tabbed:
+    alternate_style: true
