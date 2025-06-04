@@ -5,7 +5,7 @@ The objective of this activity is to construct an initial state, where:
 1. Istio is installed in sidecar mode.
 2. The sample application, `bookinfo`, is deployed with sidecars.
 3. An ingress gateway is deployed, and configured to route requests to the `productpage` service.
-4. Both L4 and L7 Authorization Policies are in place and functioning.
+4. A set of L4 and L7 authorization policies are in place and functioning.
 5. A traffic policy is in place that routes all requests for the `reviews` service to the `reviews-v3` workload.
 
 ## Provisioning a Kubernetes cluster
@@ -93,7 +93,7 @@ kubectl label ns frontend istio-injection=enabled
 Apply the manifests:
 
 ```shell
-kubectl apply -f bookinfo-frontend.yaml -n frontend 
+kubectl apply -f artifacts/bookinfo-frontend.yaml -n frontend 
 ```
 
 Repeat for the `backend` namespace:
@@ -101,10 +101,17 @@ Repeat for the `backend` namespace:
 ```shell
 kubectl create ns backend
 kubectl label ns backend istio-injection=enabled
-kubectl apply -f bookinfo-backend.yaml -n backend
+kubectl apply -f artifacts/bookinfo-backend.yaml -n backend
 ```
 
 ### Validate
+
+Verify that all pods have two containers, implying that the sidecar injection took place:
+
+```shell
+kubectl get pod -n frontend
+kubectl get pod -n backend
+```
 
 To help verify that the services are functioning, deploy a `curl` image to the cluster:
 
@@ -134,14 +141,73 @@ Make sure the calls succeed.
 
 ## Configure an ingress gateway
 
+We have the option to use either the older Istio-specific method of statically provisioning a gateway with Helm, or the Kubernetes Gateway API which allows for the dynamic provisioning of gateways.
+
+We opt for the latter.
+
+Install the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) standard channel CRDs:
+
+```shell
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+```
+
+Create the namespace where the Gateway is to be provisioned:
+
+```shell
+kubectl create ns istio-ingress
+```
+
+Apply the gateway resource:
+
+```shell
+kubectl apply -f artifacts/gateway.yaml -n istio-ingress
+```
+
+The gateway is configured to allow the binding of routes defined in the namespace `frontend`.
+
+Next, define an `HTTPRoute` to expose specific endpoints on the `productpage` service through the gateway:
+
+```shell
+kubectl apply -f artifacts/ingress-route.yaml -n frontend
+```
+
+### Validate
+
+Capture the external IP address of the Gateway:
+
+```shell
+export GW_IP=$(kubectl get gtw -n istio-ingress gateway \
+  -ojsonpath='{.status.addresses[0].value}')
+```
+
+Make a curl request to the ingress gateway using the configured hostname `bookinfo.exmaple.com`:
+
+```shell
+curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep title
+```
 
 ## Configure authorization policies
 
 ## Configure traffic policies
 
-Install the Kubernetes Gateway API:
+When `productpage` makes requests against the `reviews` service, the requests are load-balanced across all three versions of the service.
+
+Verify this by making several requests to the `productpage` service and "grepping" for the keyword "reviews":
 
 ```shell
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
+```
+
+Apply a policy that will route all requests to `reviews-v3`:
+
+```shell
+kubectl apply -f artifacts/route-reviews-v3.yaml -n backend
+```
+
+### Validate
+
+Verify that all requests are routed to version 3 by making repeated calls to `productpage`:
+
+```shell
+curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
 ```
