@@ -16,6 +16,7 @@ theme:
 nav:
 - index.md
 - setup.md
+- migrate.md
 markdown_extensions:
 - admonition
 - pymdownx.details
