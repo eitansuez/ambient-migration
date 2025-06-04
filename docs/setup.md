@@ -188,6 +188,65 @@ curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_I
 
 ## Configure authorization policies
 
+You will apply three AuthorizationPolicy resources that establish the following policy:
+
+1. Only the ingress gateway should be able to make requests to the `productpage` service.
+2. Only `reviews` workloads can call the `ratings` service.
+3. Only `productpage` can make calls to the `details` service.
+
+Furthermore:
+
+1. the first policy will be a layer 4 policy that is concerned strictly with workload identity.
+2. the remaining policies have layer 7 aspects that allows only specific HTTP methods (for example, GET or POST)
+
+Review and apply all three policies:
+
+```shell
+kubectl apply -f artifacts/productpage-authz.yaml -n frontend
+```
+
+```shell
+kubectl apply -f artifacts/ratings-authz.yaml -n backend
+```
+
+```shell
+kubectl apply -f artifacts/details-authz.yaml -n backend
+```
+
+Note how the identity of the allowed caller is specified via the Istio spiffe id which is a function of the workload's service account.
+
+### Validate
+
+1. A request from an unauthorized workload to the `productpage` service should be denied:
+
+    ```shell
+    kubectl exec deploy/curl -n frontend -- \
+      curl -s --head productpage:9080/productpage
+    ```
+
+2. A request from an unauthorized workload to the `ratings` service should be denied:
+
+    ```shell
+    kubectl exec deploy/curl -n frontend -- \
+      curl -s ratings.backend:9080/ratings/123
+    ```
+
+    It should produce a `HTTP/1.1 403 Forbidden` response.
+
+2. A request from an unauthorized workload to the `details` service should be denied:
+
+    ```shell
+    kubectl exec deploy/curl -n frontend -- \
+      curl -s details.backend:9080/details/123
+    ```
+
+4. A request through the ingress gateway to product page and upstream should succeed:
+
+    ```shell
+    curl -s --head bookinfo.example.com/productpage \
+      --resolve bookinfo.example.com:80:$GW_IP
+    ```
+
 ## Configure traffic policies
 
 When `productpage` makes requests against the `reviews` service, the requests are load-balanced across all three versions of the service.
@@ -211,3 +270,9 @@ Verify that all requests are routed to version 3 by making repeated calls to `pr
 ```shell
 curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
 ```
+
+## Summary
+
+We have configured our initial state:  a system of microservices functioning with Istio in sidecar mode, with a combination of L4 and L7 security policies, and a traffic policy applied to the `reviews` service.
+
+In the next section, we will work on migrating this system to Istio ambient mode.
