@@ -1,0 +1,1155 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://eitansuez.github.io/ambient-migration/setup/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../migrate/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Initial Setup - Migrating from Sidecars to Ambient Mesh</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#initial-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Migrating from Sidecars to Ambient Mesh" class="md-header__button md-logo" aria-label="Migrating from Sidecars to Ambient Mesh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Migrating from Sidecars to Ambient Mesh
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Initial Setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/eitansuez/ambient-migration" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Migrating from Sidecars to Ambient Mesh" class="md-nav__button md-logo" aria-label="Migrating from Sidecars to Ambient Mesh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Migrating from Sidecars to Ambient Mesh
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/eitansuez/ambient-migration" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Initial Setup
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Initial Setup
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#provisioning-a-kubernetes-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provisioning a Kubernetes cluster
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-istio-in-sidecar-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install Istio in sidecar mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install Istio in sidecar mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-bookinfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy bookinfo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy bookinfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-an-ingress-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure an ingress gateway
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure an ingress gateway">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-authorization-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure authorization policies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure authorization policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-traffic-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure traffic policies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure traffic policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migrating to Ambient
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#provisioning-a-kubernetes-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provisioning a Kubernetes cluster
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-istio-in-sidecar-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install Istio in sidecar mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install Istio in sidecar mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-bookinfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy bookinfo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy bookinfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-an-ingress-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure an ingress gateway
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure an ingress gateway">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-authorization-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure authorization policies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure authorization policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-traffic-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure traffic policies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure traffic policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="initial-setup">Initial Setup</h1>
+<p>The objective of this activity is to construct an initial state, where:</p>
+<ol>
+<li>Istio is installed in sidecar mode.</li>
+<li>The sample application, <code>bookinfo</code>, is deployed with sidecars.</li>
+<li>An ingress gateway is deployed, and configured to route requests to the <code>productpage</code> service.</li>
+<li>A set of L4 and L7 authorization policies are in place and functioning.</li>
+<li>A traffic policy is in place that routes all requests for the <code>reviews</code> service to the <code>reviews-v3</code> workload.</li>
+</ol>
+<h2 id="provisioning-a-kubernetes-cluster">Provisioning a Kubernetes cluster</h2>
+<p>Feel free to provision a Kubernetes cluster of your choice, locally or in the cloud.</p>
+<p>The following snippet installs a local Kubernetes cluster with k3d.  For more information, see <a href="https://istio.io/latest/docs/setup/platform-setup/k3d/">here</a>.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>k3d<span class="w"> </span>cluster<span class="w"> </span>create<span class="w"> </span>my-cluster<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>--api-port<span class="w"> </span><span class="m">6443</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>--k3s-arg<span class="w"> </span><span class="s2">&quot;--disable=traefik@server:0&quot;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span>--port<span class="w"> </span><span class="m">80</span>:80@loadbalancer<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span>--port<span class="w"> </span><span class="m">443</span>:443@loadbalancer
+</span></code></pre></div>
+<h2 id="install-istio-in-sidecar-mode">Install Istio in sidecar mode</h2>
+<p>Per the <a href="https://istio.io/latest/docs/setup/install/helm/">instructions for installing Istio in sidecar mode with Helm</a>:</p>
+<p>Configure the Helm repository:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>istio<span class="w"> </span>https://istio-release.storage.googleapis.com/charts
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
+</span></code></pre></div>
+<p>Install the Istio CRDs:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>helm<span class="w"> </span>install<span class="w"> </span>istio-base<span class="w"> </span>istio/base<span class="w"> </span>-n<span class="w"> </span>istio-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--set<span class="w"> </span><span class="nv">defaultRevision</span><span class="o">=</span>default<span class="w"> </span>--create-namespace
+</span></code></pre></div>
+<p>Install the Istio CNI:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>helm<span class="w"> </span>install<span class="w"> </span>istio-cni<span class="w"> </span>istio/cni<span class="w"> </span>-n<span class="w"> </span>istio-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--set<span class="w"> </span>global.platform<span class="o">=</span>k3d<span class="w"> </span>--wait
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">About the <code>global.platform</code> flag</p>
+<p>The <code>global.platform</code> flag is a <a href="https://istio.io/latest/docs/ambient/install/platform-prerequisites/#k3d">requirement on specific platforms</a> when installing the Istio CNI.</p>
+</div>
+<p>Install the <code>istiod</code> control plane:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>helm<span class="w"> </span>install<span class="w"> </span>istiod<span class="w"> </span>istio/istiod<span class="w"> </span>-n<span class="w"> </span>istio-system<span class="w"> </span>--wait
+</span></code></pre></div>
+<h3 id="validate">Validate</h3>
+<p>Verify that both <code>istiod</code> and <code>istio-cni</code> pods are in Running state, in the <code>istio-system</code> namespace:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>istio-system
+</span></code></pre></div>
+<p>List the helm releases in <code>istio-system</code>:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>helm<span class="w"> </span>ls<span class="w"> </span>-n<span class="w"> </span>istio-system
+</span></code></pre></div>
+<h2 id="deploy-bookinfo">Deploy <code>bookinfo</code></h2>
+<p>In this scenario, the <code>bookinfo</code> services are split across two namespaces:</p>
+<ul>
+<li>the <code>frontend</code> namespace hosts the <code>productpage</code> service</li>
+<li>the <code>backend</code> namespace hosts the services upstream from it: <code>reviews</code>, <code>ratings</code>, and <code>details</code></li>
+</ul>
+<p>Create the namespace:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>ns<span class="w"> </span>frontend
+</span></code></pre></div>
+<p>Label the namespace for sidecar injection:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>ns<span class="w"> </span>frontend<span class="w"> </span>istio-injection<span class="o">=</span>enabled
+</span></code></pre></div>
+<p>Apply the manifests:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/bookinfo-frontend.yaml<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>
+</span></code></pre></div>
+<p>Repeat for the <code>backend</code> namespace:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>ns<span class="w"> </span>backend
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>kubectl<span class="w"> </span>label<span class="w"> </span>ns<span class="w"> </span>backend<span class="w"> </span>istio-injection<span class="o">=</span>enabled
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/bookinfo-backend.yaml<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+<h3 id="validate_1">Validate</h3>
+<p>Verify that all pods have two containers, implying that the sidecar injection took place:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>frontend
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+<p>To help verify that the services are functioning, deploy a <code>curl</code> image to the cluster:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>-f<span class="w"> </span>https://raw.githubusercontent.com/istio/istio/refs/heads/master/samples/curl/curl.yaml
+</span></code></pre></div>
+<p>Make a test call to the <code>ratings</code> service:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>ratings.backend:9080/ratings/123<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</span></code></pre></div>
+<p>Call the <code>reviews</code> service:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>reviews.backend:9080/reviews/123<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+</span></code></pre></div>
+<p>Finally, call the <code>productpage</code> service:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="w"> </span>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>productpage:9080/productpage<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>title
+</span></code></pre></div>
+<p>Make sure the calls succeed.</p>
+<h2 id="configure-an-ingress-gateway">Configure an ingress gateway</h2>
+<p>We have the option to use either the older Istio-specific method of statically provisioning a gateway with Helm, or the Kubernetes Gateway API which allows for the dynamic provisioning of gateways.</p>
+<p>We opt for the latter.</p>
+<p>Install the <a href="https://gateway-api.sigs.k8s.io/">Kubernetes Gateway API</a> standard channel CRDs:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+</span></code></pre></div>
+<p>Create the namespace where the Gateway is to be provisioned:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>ns<span class="w"> </span>istio-ingress
+</span></code></pre></div>
+<p>Review the Gateway configuration:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">gateway.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span>
+<span class="normal"><a href="#__codelineno-18-11">11</a></span>
+<span class="normal"><a href="#__codelineno-18-12">12</a></span>
+<span class="normal"><a href="#__codelineno-18-13">13</a></span>
+<span class="normal"><a href="#__codelineno-18-14">14</a></span>
+<span class="normal"><a href="#__codelineno-18-15">15</a></span>
+<span class="normal"><a href="#__codelineno-18-16">16</a></span>
+<span class="normal"><a href="#__codelineno-18-17">17</a></span>
+<span class="normal"><a href="#__codelineno-18-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="nn">---</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Gateway</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">  </span><span class="nt">gatewayClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">istio</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bookinfo.example.com&quot;</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTP</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="w">    </span><span class="nt">allowedRoutes</span><span class="p">:</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">      </span><span class="nt">namespaces</span><span class="p">:</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="w">        </span><span class="nt">from</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Selector</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="w">        </span><span class="nt">selector</span><span class="p">:</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="w">            </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="w">              </span><span class="nt">kubernetes.io/metadata.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+</span></code></pre></div></td></tr></table></div>
+<p>The gateway is configured to allow the binding of routes defined in the namespace <code>frontend</code>.</p>
+<p>Apply the Gateway resource:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/gateway.yaml<span class="w"> </span>-n<span class="w"> </span>istio-ingress
+</span></code></pre></div>
+<p>Next, define an <code>HTTPRoute</code> to expose specific endpoints on the <code>productpage</code> service through the gateway:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ingress-route.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span>
+<span class="normal"><a href="#__codelineno-20-11">11</a></span>
+<span class="normal"><a href="#__codelineno-20-12">12</a></span>
+<span class="normal"><a href="#__codelineno-20-13">13</a></span>
+<span class="normal"><a href="#__codelineno-20-14">14</a></span>
+<span class="normal"><a href="#__codelineno-20-15">15</a></span>
+<span class="normal"><a href="#__codelineno-20-16">16</a></span>
+<span class="normal"><a href="#__codelineno-20-17">17</a></span>
+<span class="normal"><a href="#__codelineno-20-18">18</a></span>
+<span class="normal"><a href="#__codelineno-20-19">19</a></span>
+<span class="normal"><a href="#__codelineno-20-20">20</a></span>
+<span class="normal"><a href="#__codelineno-20-21">21</a></span>
+<span class="normal"><a href="#__codelineno-20-22">22</a></span>
+<span class="normal"><a href="#__codelineno-20-23">23</a></span>
+<span class="normal"><a href="#__codelineno-20-24">24</a></span>
+<span class="normal"><a href="#__codelineno-20-25">25</a></span>
+<span class="normal"><a href="#__codelineno-20-26">26</a></span>
+<span class="normal"><a href="#__codelineno-20-27">27</a></span>
+<span class="normal"><a href="#__codelineno-20-28">28</a></span>
+<span class="normal"><a href="#__codelineno-20-29">29</a></span>
+<span class="normal"><a href="#__codelineno-20-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nn">---</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPRoute</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">productpage</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">  </span><span class="nt">parentRefs</span><span class="p">:</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">istio-ingress</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="w">  </span><span class="nt">hostnames</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;bookinfo.example.com&quot;</span><span class="p p-Indicator">]</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">matches</span><span class="p">:</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exact</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/productpage</span>
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span>
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PathPrefix</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/static</span>
+</span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span>
+</span><span id="__span-20-20"><a id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exact</span>
+</span><span id="__span-20-21"><a id="__codelineno-20-21" name="__codelineno-20-21"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/login</span>
+</span><span id="__span-20-22"><a id="__codelineno-20-22" name="__codelineno-20-22"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span>
+</span><span id="__span-20-23"><a id="__codelineno-20-23" name="__codelineno-20-23"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Exact</span>
+</span><span id="__span-20-24"><a id="__codelineno-20-24" name="__codelineno-20-24"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/logout</span>
+</span><span id="__span-20-25"><a id="__codelineno-20-25" name="__codelineno-20-25"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span>
+</span><span id="__span-20-26"><a id="__codelineno-20-26" name="__codelineno-20-26"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PathPrefix</span>
+</span><span id="__span-20-27"><a id="__codelineno-20-27" name="__codelineno-20-27"></a><span class="w">        </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/api/v1/products</span>
+</span><span id="__span-20-28"><a id="__codelineno-20-28" name="__codelineno-20-28"></a><span class="w">    </span><span class="nt">backendRefs</span><span class="p">:</span>
+</span><span id="__span-20-29"><a id="__codelineno-20-29" name="__codelineno-20-29"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">productpage</span>
+</span><span id="__span-20-30"><a id="__codelineno-20-30" name="__codelineno-20-30"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9080</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Apply the HTTPRoute:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/ingress-route.yaml<span class="w"> </span>-n<span class="w"> </span>frontend
+</span></code></pre></div>
+<h3 id="validate_2">Validate</h3>
+<p>Capture the external IP address of the Gateway:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GW_IP</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>gtw<span class="w"> </span>-n<span class="w"> </span>istio-ingress<span class="w"> </span>gateway<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span>-ojsonpath<span class="o">=</span><span class="s1">&#39;{.status.addresses[0].value}&#39;</span><span class="k">)</span>
+</span></code></pre></div>
+<p>Make a curl request to the ingress gateway using the configured hostname <code>bookinfo.exmaple.com</code>:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>title
+</span></code></pre></div>
+<h2 id="configure-authorization-policies">Configure authorization policies</h2>
+<p>You will apply three AuthorizationPolicy resources that establish the following policy:</p>
+<ol>
+<li>Only the ingress gateway should be able to make requests to the <code>productpage</code> service.</li>
+<li>Only <code>reviews</code> workloads can call the <code>ratings</code> service.</li>
+<li>Only <code>productpage</code> can make calls to the <code>details</code> service.</li>
+</ol>
+<p>Furthermore:</p>
+<ol>
+<li>The first policy will be a layer 4 policy that is concerned strictly with workload identity.</li>
+<li>The remaining policies have layer 7 aspects that allows only specific HTTP methods (for example, GET or POST).</li>
+</ol>
+<p>Review all three policies:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">productpage-authz.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span>
+<span class="normal"><a href="#__codelineno-24-14">14</a></span>
+<span class="normal"><a href="#__codelineno-24-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="nn">---</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">security.istio.io/v1</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AuthorizationPolicy</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">productpage-authz</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">productpage</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ALLOW</span>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source</span><span class="p">:</span>
+</span><span id="__span-24-14"><a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">        </span><span class="nt">principals</span><span class="p">:</span>
+</span><span id="__span-24-15"><a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster.local/ns/istio-ingress/sa/gateway-istio</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Note how the identity of the allowed caller is specified via the Istio spiffe id which is a function of the workload's location (namespace) and service account.</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">ratings-authz.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-25-10">10</a></span>
+<span class="normal"><a href="#__codelineno-25-11">11</a></span>
+<span class="normal"><a href="#__codelineno-25-12">12</a></span>
+<span class="normal"><a href="#__codelineno-25-13">13</a></span>
+<span class="normal"><a href="#__codelineno-25-14">14</a></span>
+<span class="normal"><a href="#__codelineno-25-15">15</a></span>
+<span class="normal"><a href="#__codelineno-25-16">16</a></span>
+<span class="normal"><a href="#__codelineno-25-17">17</a></span>
+<span class="normal"><a href="#__codelineno-25-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="nn">---</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">security.istio.io/v1</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AuthorizationPolicy</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ratings-authz</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ratings</span>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ALLOW</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source</span><span class="p">:</span>
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="w">        </span><span class="nt">principals</span><span class="p">:</span>
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster.local/ns/backend/sa/bookinfo-reviews</span>
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16"></a><span class="w">    </span><span class="nt">to</span><span class="p">:</span>
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">operation</span><span class="p">:</span>
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18"></a><span class="w">        </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;GET&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;POST&quot;</span><span class="p p-Indicator">]</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">details-authz.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span>
+<span class="normal"><a href="#__codelineno-26-13">13</a></span>
+<span class="normal"><a href="#__codelineno-26-14">14</a></span>
+<span class="normal"><a href="#__codelineno-26-15">15</a></span>
+<span class="normal"><a href="#__codelineno-26-16">16</a></span>
+<span class="normal"><a href="#__codelineno-26-17">17</a></span>
+<span class="normal"><a href="#__codelineno-26-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="nn">---</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">security.istio.io/v1</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AuthorizationPolicy</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">details-authz</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">details</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="w">  </span><span class="nt">action</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ALLOW</span>
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">from</span><span class="p">:</span>
+</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source</span><span class="p">:</span>
+</span><span id="__span-26-14"><a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="w">        </span><span class="nt">principals</span><span class="p">:</span>
+</span><span id="__span-26-15"><a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster.local/ns/frontend/sa/bookinfo-productpage</span>
+</span><span id="__span-26-16"><a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="w">    </span><span class="nt">to</span><span class="p">:</span>
+</span><span id="__span-26-17"><a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">operation</span><span class="p">:</span>
+</span><span id="__span-26-18"><a id="__codelineno-26-18" name="__codelineno-26-18"></a><span class="w">        </span><span class="nt">methods</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;GET&quot;</span><span class="p p-Indicator">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Apply all three policies:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/productpage-authz.yaml<span class="w"> </span>-n<span class="w"> </span>frontend
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/ratings-authz.yaml<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/details-authz.yaml<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+<h3 id="validate_3">Validate</h3>
+<ol>
+<li>
+<p>A request from an unauthorized workload to the <code>productpage</code> service should be denied:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>productpage:9080/productpage
+</span></code></pre></div>
+</li>
+<li>
+<p>A request from an unauthorized workload to the <code>ratings</code> service should be denied:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>ratings.backend:9080/ratings/123
+</span></code></pre></div>
+<p>It should produce a <code>HTTP/1.1 403 Forbidden</code> response.</p>
+</li>
+<li>
+<p>A request from an unauthorized workload to the <code>details</code> service should be denied:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>details.backend:9080/details/123
+</span></code></pre></div>
+</li>
+<li>
+<p>A request through the ingress gateway to product page and upstream should succeed:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span>
+</span></code></pre></div>
+</li>
+</ol>
+<h2 id="configure-traffic-policies">Configure traffic policies</h2>
+<p>When <code>productpage</code> makes requests against the <code>reviews</code> service, the requests are load-balanced across all three versions of the service.</p>
+<p>Verify this by making several requests to the <code>productpage</code> service and "grepping" for the keyword "reviews-":</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;reviews-&quot;</span>
+</span></code></pre></div>
+<p>Review the following traffic policy which will route all requests to <code>reviews-v3</code>:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">route-reviews-v3.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-35-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-35-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-35-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-35-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-35-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-35-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-35-10">10</a></span>
+<span class="normal"><a href="#__codelineno-35-11">11</a></span>
+<span class="normal"><a href="#__codelineno-35-12">12</a></span>
+<span class="normal"><a href="#__codelineno-35-13">13</a></span>
+<span class="normal"><a href="#__codelineno-35-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="nn">---</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HTTPRoute</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bookinfo-reviews</span>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7"></a><span class="w">  </span><span class="nt">parentRefs</span><span class="p">:</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reviews</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10"></a><span class="w">    </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11"></a><span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">backendRefs</span><span class="p">:</span>
+</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reviews-v3</span>
+</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14"></a><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9080</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Apply the policy:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/route-reviews-v3.yaml<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+<h3 id="validate_4">Validate</h3>
+<p>Verify that all requests are routed to version 3 by making repeated calls to <code>productpage</code>:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;reviews-&quot;</span>
+</span></code></pre></div>
+<h2 id="summary">Summary</h2>
+<p>We have configured our initial state:  a system of microservices functioning with Istio in sidecar mode, with a combination of L4 and L7 security policies, and a traffic policy applied to the <code>reviews</code> service.</p>
+<p>In the next section, we will work on migrating this system to Istio ambient mode.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../migrate/" class="md-footer__link md-footer__link--next" aria-label="Next: Migrating to Ambient">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Migrating to Ambient
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.instant", "navigation.tracking", "navigation.footer", "navigation.expand", "content.code.annotate", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
