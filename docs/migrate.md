@@ -1,6 +1,10 @@
 # Migrating to Ambient
 
-_Under development_.
+## Analysis
+
+tbd
+
+## The migration tool
 
 - download the migration tool
 - migration plan

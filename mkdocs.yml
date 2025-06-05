@@ -15,6 +15,7 @@ theme:
     primary: blue grey
 nav:
 - index.md
+- pre-analysis.md
 - setup.md
 - migrate.md
 markdown_extensions:
