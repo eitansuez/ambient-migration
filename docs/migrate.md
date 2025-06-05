@@ -171,7 +171,102 @@ In order to effect that change, the assistant instructs us to restart the pods t
 
 This is a good example of a step that we hadn't considered in our plan.
 
+In scenarios where we expect to run a mix of workloads, some sidecar-based and others sidecarless, this step would be important.
+
+Go ahead and heed the recommendation by restarting the workloads:
+
+```shell
+kubectl rollout restart deploy -n backend
+```
+And:
+
+```shell
+kubectl rollout restart deploy -n frontend
+```
+
+Note that the above are still running sidecars.
+
+## Assistant, what's next?
+
+You know the drill by now:
+
+```shell
+gloo ambient migrate
+```
+
+Here is the salient output:
+
+```console
+• Starting phase deploy-waypoints...
+⚠ Phase deploy-waypoints has recommendations!
+  🔮 Namespace "backend" might require a waypoint for the following services:
+     * Service "backend/details" selected workload apps/v1/Deployment/backend/details-v1 requires a waypoint:
+         AuthorizationPolicy backend/details-authz requires a waypoint due to HTTP attributes (methods)
+
+     * Service "backend/details-v1" selected workload apps/v1/Deployment/backend/details-v1 requires a waypoint:
+         AuthorizationPolicy backend/details-authz requires a waypoint due to HTTP attributes (methods)
+
+     * Service "backend/ratings" selected workload apps/v1/Deployment/backend/ratings-v1 requires a waypoint:
+         AuthorizationPolicy backend/ratings-authz requires a waypoint due to HTTP attributes (methods)
+
+     * Service "backend/ratings-v1" selected workload apps/v1/Deployment/backend/ratings-v1 requires a waypoint:
+         AuthorizationPolicy backend/ratings-authz requires a waypoint due to HTTP attributes (methods)
+
+
+  ℹ Generated waypoints written to /tmp/istio-migrate/recommended-waypoints.yaml
+```
+
+The assistant has validated our analysis that:
+
+- The authorization policies on backend services require a waypoint.
+- The authorization policy on frontend services do not necessitate a waypoint.
+
+It's interesting that it hasn't determined that `reviews` needs a waypoint too, on account of its traffic policy.
+
+On the other hand, it's awfully nice to see a generated waypoint provided by the assistant:
+
+```shell
+cat /tmp/istio-migrate/recommended-waypoints.yaml
+```
+
+Here is the generated waypoint, it's a Gateway resource:
+
+```yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: waypoint
+  namespace: backend
+spec:
+  gatewayClassName: istio-waypoint
+  listeners:
+  - name: mesh
+    port: 15008
+    protocol: HBONE
+```
+
 ## Deploy the waypoint
+
+Apply the recommended waypoint:
+
+```shell
+kubectl apply -f /tmp/istio-migrate/recommended-waypoints.yaml
+```
+
+Note however that just applying the waypoint does not also bind it to specific workloads.
+
+Verify that the waypoint is present in the `backend` namespace:
+
+```shell
+istioctl waypoint list -n backend
+```
+
+Here is the output:
+
+```console
+NAME         REVISION     PROGRAMMED
+waypoint     default      True
+```
 
 ## Apply retrofitted authorization policies
 
