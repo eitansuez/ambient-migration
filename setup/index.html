@@ -1089,7 +1089,7 @@
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/route-reviews-v3.yaml<span class="w"> </span>-n<span class="w"> </span>backend
 </span></code></pre></div>
 <h3 id="validate_4">Validate</h3>
-<p>Verify that all requests are routed to version 3 by making repeated calls to <code>productpage</code>:</p>
+<p>Verify that all requests are routed to <code>reviews-v3</code> by making repeated calls to <code>productpage</code>:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;reviews-&quot;</span>
 </span></code></pre></div>
 <h2 id="summary">Summary</h2>

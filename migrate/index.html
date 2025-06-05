@@ -460,6 +460,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assistant..?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#apply-retrofitted-authorization-policies" class="md-nav__link">
     <span class="md-ellipsis">
       Apply retrofitted authorization policies
@@ -469,9 +478,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bind-the-waypoint-to-the-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bind the waypoint to the services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#switch-to-ambient-mode" class="md-nav__link">
     <span class="md-ellipsis">
       Switch to ambient mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Switch to ambient mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove-the-istio-injection-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove the istio-injection labels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-the-dataplane-mode-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add the dataplane-mode label
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assistant-one-more-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assistant, one more time
     </span>
   </a>
   
@@ -659,6 +719,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#assistant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assistant..?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#apply-retrofitted-authorization-policies" class="md-nav__link">
     <span class="md-ellipsis">
       Apply retrofitted authorization policies
@@ -668,9 +737,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bind-the-waypoint-to-the-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bind the waypoint to the services
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#switch-to-ambient-mode" class="md-nav__link">
     <span class="md-ellipsis">
       Switch to ambient mode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Switch to ambient mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remove-the-istio-injection-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remove the istio-injection labels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-the-dataplane-mode-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add the dataplane-mode label
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assistant-one-more-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assistant, one more time
     </span>
   </a>
   
@@ -935,13 +1055,131 @@ And:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">NAME         REVISION     PROGRAMMED</span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="go">waypoint     default      True</span>
 </span></code></pre></div>
+<h2 id="assistant">Assistant..?</h2>
+<p>Re-run the assistant:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
+</span></code></pre></div>
+<p>Study the output:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">...</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="go">• Starting phase migrate-policies...</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="go">⚠ Phase migrate-policies has recommendations!</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-from-waypoint: v1/Service/backend/details must allow traffic from its waypoint.</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-details-authz: Existing configuration is copied from policy backend/details-authz to be enforced at the waypoint.</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-v1-from-waypoint: v1/Service/backend/details-v1 must allow traffic from its waypoint.</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-v1-details-authz: Existing configuration is copied from policy backend/details-authz to be enforced at the waypoint.</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-from-waypoint: v1/Service/backend/ratings must allow traffic from its waypoint.</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-ratings-authz: Existing configuration is copied from policy backend/ratings-authz to be enforced at the waypoint.</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-v1-from-waypoint: v1/Service/backend/ratings-v1 must allow traffic from its waypoint.</span>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-v1-ratings-authz: Existing configuration is copied from policy backend/ratings-authz to be enforced at the waypoint.</span>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="go">  ℹ Recommended policies written to /tmp/istio-migrate/recommended-policies.yaml</span>
+</span></code></pre></div>
+<p>We get a mention that the waypoint will be used for specific backend services.
+We make a mental note of that.</p>
+<p>The salient section tells us what we expected:  that our authorization policies must be retrofitted to use a <code>targetRefs</code> field.</p>
+<p>Rather than do the work ourselves, the tool has provided the resources in the file <code>recommended-policies.yaml</code>.</p>
 <h2 id="apply-retrofitted-authorization-policies">Apply retrofitted authorization policies</h2>
+<p>It's worth mentioned that we are not yet deleting any existing authoriation policies.
+Rather, we add the equivalent policies that will function in the context of the waypoints.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>/tmp/istio-migrate/recommended-policies.yaml
+</span></code></pre></div>
+<p>A close look at the recommended policies shows that the tool is doing its due diligence to permit requests that target either the <code>ratings</code> and <code>ratings-v1</code> services, and similarly for the <code>details</code> and <code>details-v1</code> services.</p>
+<h2 id="bind-the-waypoint-to-the-services">Bind the waypoint to the services</h2>
+<p>Another run of the assistant points this out:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">• Starting phase use-waypoints...</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">⚠ Phase use-waypoints has recommendations!</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">  ⚠ Waypoint backend/waypoint is not used by any services.</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="go">  🔮 Service v1/Service/backend/details requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend details istio.io/use-waypoint=waypoint</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="go">  🔮 Service v1/Service/backend/details-v1 requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend details-v1 istio.io/use-waypoint=waypoint</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="go">  🔮 Service v1/Service/backend/ratings requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend ratings istio.io/use-waypoint=waypoint</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="go">  🔮 Service v1/Service/backend/ratings-v1 requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend ratings-v1 istio.io/use-waypoint=waypoint</span>
+</span></code></pre></div>
+<p>It suggests binding the waypoint to our services by labeling each service with the <code>istio.io/use-waypoint</code> conventional label.</p>
+<p>Here we know that in addition to <code>ratings</code> and <code>details</code>, we must also label <code>reviews</code> services to use the waypoint, in order to support the traffic policy that is in place for <code>reviews</code>.</p>
+<p>It seems silly to label every single service in the <code>backend</code> namespace.
+Since in this case all workloads in <code>backend</code> should be enrolled to use the waypoint, let's just label the namespace:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio.io/use-waypoint<span class="o">=</span>waypoint
+</span></code></pre></div>
+<p>Re-run the assistant to validate that all services have the associated waypoint.</p>
 <h2 id="switch-to-ambient-mode">Switch to ambient mode</h2>
+<p>It's time to finally switch to ambient mode.</p>
+<h3 id="remove-the-istio-injection-labels">Remove the <code>istio-injection</code> labels</h3>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>frontend<span class="w"> </span>istio-injection-
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio-injection-
+</span></code></pre></div>
+<h3 id="add-the-dataplane-mode-label">Add the <code>dataplane-mode</code> label</h3>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>frontend<span class="w"> </span>istio.io/dataplane-mode<span class="o">=</span>ambient
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio.io/dataplane-mode<span class="o">=</span>ambient
+</span></code></pre></div>
+<p>This label will ensure that ztunnel intercepts traffic in and out of our workloads.</p>
+<p>We can finally remove the sidecars by restarting the workloads:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>frontend
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+<h3 id="validate">Validate</h3>
+<p>Verify that all pods in <code>frontend</code> and <code>backend</code> have a single container:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>frontend
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+<h2 id="assistant-one-more-time">Assistant, one more time</h2>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
+</span></code></pre></div>
+<p>Here is the output:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">• Starting phase policy-simplification...</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="go">⚠ Phase policy-simplification has recommendations!</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="go">  🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend details-authz</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="go">  🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend ratings-authz</span>
+</span></code></pre></div>
+<p>The only task remaining it appears, is to remove the now redundant, original authorization policies for <code>details</code> and <code>ratings</code> services.</p>
+<p>Make it so:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>authorizationpolicies.security.istio.io<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>details-authz
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>authorizationpolicies.security.istio.io<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>ratings-authz
+</span></code></pre></div>
+<p>Finally, <code>gloo ambient migrate</code> should return "all-green" output.</p>
+<p>But this does not, in my opinion, replace the need to verify for ourselves that everything functions as expected..</p>
 <h2 id="test-everything">Test everything</h2>
 <h3 id="test-ingress">Test Ingress</h3>
+<p>Capture the external IP address of the Gateway:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GW_IP</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>gtw<span class="w"> </span>-n<span class="w"> </span>istio-ingress<span class="w"> </span>gateway<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span>-ojsonpath<span class="o">=</span><span class="s1">&#39;{.status.addresses[0].value}&#39;</span><span class="k">)</span>
+</span></code></pre></div>
+<p>Make a curl request to the ingress gateway using the configured hostname <code>bookinfo.exmaple.com</code>:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>title
+</span></code></pre></div>
 <h3 id="test-authorization-policies">Test authorization policies</h3>
+<ol>
+<li>
+<p>A request from an unauthorized workload to the <code>productpage</code> service should be denied:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>productpage:9080/productpage
+</span></code></pre></div>
+</li>
+<li>
+<p>A request from an unauthorized workload to the <code>ratings</code> service should be denied:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>ratings.backend:9080/ratings/123
+</span></code></pre></div>
+<p>It should produce a response saying <code>RBAC: access denied</code>.</p>
+</li>
+<li>
+<p>A request from an unauthorized workload to the <code>details</code> service should be denied:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>details.backend:9080/details/123
+</span></code></pre></div>
+</li>
+<li>
+<p>A request through the ingress gateway to product page and upstream should succeed:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">  </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span>
+</span></code></pre></div>
+</li>
+</ol>
 <h3 id="test-traffic-policy">Test traffic policy</h3>
+<p>Verify that all requests are routed to <code>reviews-v3</code> by making repeated calls to <code>productpage</code>:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;reviews-&quot;</span>
+</span></code></pre></div>
 <h2 id="summary">Summary</h2>
+<p>We are running in ambient mode, and our mesh policies continue to function.</p>
+<p>From a resource consumption point of view, we are now running a single waypoint, compared to one per pod back when we were running in sidecar mode.</p>
 
 
 
