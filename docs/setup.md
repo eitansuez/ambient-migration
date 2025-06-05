@@ -297,7 +297,7 @@ kubectl apply -f artifacts/route-reviews-v3.yaml -n backend
 
 ### Validate
 
-Verify that all requests are routed to version 3 by making repeated calls to `productpage`:
+Verify that all requests are routed to `reviews-v3` by making repeated calls to `productpage`:
 
 ```shell
 curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"

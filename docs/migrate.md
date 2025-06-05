@@ -268,16 +268,199 @@ NAME         REVISION     PROGRAMMED
 waypoint     default      True
 ```
 
+## Assistant..?
+
+Re-run the assistant:
+
+```shell
+gloo ambient migrate
+```
+
+Study the output:
+
+```console
+...
+• Starting phase migrate-policies...
+⚠ Phase migrate-policies has recommendations!
+  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-from-waypoint: v1/Service/backend/details must allow traffic from its waypoint.
+  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-details-authz: Existing configuration is copied from policy backend/details-authz to be enforced at the waypoint.
+  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-v1-from-waypoint: v1/Service/backend/details-v1 must allow traffic from its waypoint.
+  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-v1-details-authz: Existing configuration is copied from policy backend/details-authz to be enforced at the waypoint.
+  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-from-waypoint: v1/Service/backend/ratings must allow traffic from its waypoint.
+  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-ratings-authz: Existing configuration is copied from policy backend/ratings-authz to be enforced at the waypoint.
+  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-v1-from-waypoint: v1/Service/backend/ratings-v1 must allow traffic from its waypoint.
+  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-v1-ratings-authz: Existing configuration is copied from policy backend/ratings-authz to be enforced at the waypoint.
+  ℹ Recommended policies written to /tmp/istio-migrate/recommended-policies.yaml
+```
+
+We get a mention that the waypoint will be used for specific backend services.
+We make a mental note of that.
+
+The salient section tells us what we expected:  that our authorization policies must be retrofitted to use a `targetRefs` field.
+
+Rather than do the work ourselves, the tool has provided the resources in the file `recommended-policies.yaml`.
+
 ## Apply retrofitted authorization policies
 
+It's worth mentioned that we are not yet deleting any existing authoriation policies.
+Rather, we add the equivalent policies that will function in the context of the waypoints.
+
+```shell
+kubectl apply -f /tmp/istio-migrate/recommended-policies.yaml
+```
+
+A close look at the recommended policies shows that the tool is doing its due diligence to permit requests that target either the `ratings` and `ratings-v1` services, and similarly for the `details` and `details-v1` services.
+
+## Bind the waypoint to the services
+
+Another run of the assistant points this out:
+
+```console
+• Starting phase use-waypoints...
+⚠ Phase use-waypoints has recommendations!
+  ⚠ Waypoint backend/waypoint is not used by any services.
+  🔮 Service v1/Service/backend/details requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend details istio.io/use-waypoint=waypoint
+  🔮 Service v1/Service/backend/details-v1 requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend details-v1 istio.io/use-waypoint=waypoint
+  🔮 Service v1/Service/backend/ratings requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend ratings istio.io/use-waypoint=waypoint
+  🔮 Service v1/Service/backend/ratings-v1 requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend ratings-v1 istio.io/use-waypoint=waypoint
+```
+
+It suggests binding the waypoint to our services by labeling each service with the `istio.io/use-waypoint` conventional label.
+
+Here we know that in addition to `ratings` and `details`, we must also label `reviews` services to use the waypoint, in order to support the traffic policy that is in place for `reviews`.
+
+It seems silly to label every single service in the `backend` namespace.
+Since in this case all workloads in `backend` should be enrolled to use the waypoint, let's just label the namespace:
+
+```shell
+kubectl label namespace backend istio.io/use-waypoint=waypoint
+```
+
+Re-run the assistant to validate that all services have the associated waypoint.
+
 ## Switch to ambient mode
+
+It's time to finally switch to ambient mode.
+
+### Remove the `istio-injection` labels
+
+```shell
+kubectl label namespace frontend istio-injection-
+kubectl label namespace backend istio-injection-
+```
+
+### Add the `dataplane-mode` label
+
+```shell
+kubectl label namespace frontend istio.io/dataplane-mode=ambient
+kubectl label namespace backend istio.io/dataplane-mode=ambient
+```
+
+This label will ensure that ztunnel intercepts traffic in and out of our workloads.
+
+We can finally remove the sidecars by restarting the workloads:
+
+```shell
+kubectl rollout restart deploy -n frontend
+kubectl rollout restart deploy -n backend
+```
+
+### Validate
+
+Verify that all pods in `frontend` and `backend` have a single container:
+
+```shell
+kubectl get pod -n frontend
+kubectl get pod -n backend
+```
+
+## Assistant, one more time
+
+```shell
+gloo ambient migrate
+```
+
+Here is the output:
+
+```console
+• Starting phase policy-simplification...
+⚠ Phase policy-simplification has recommendations!
+  🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend details-authz
+  🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend ratings-authz
+```
+
+The only task remaining it appears, is to remove the now redundant, original authorization policies for `details` and `ratings` services.
+
+Make it so:
+
+```shell
+kubectl delete authorizationpolicies.security.istio.io -n backend details-authz
+kubectl delete authorizationpolicies.security.istio.io -n backend ratings-authz
+```
+
+Finally, `gloo ambient migrate` should return "all-green" output.
+
+But this does not, in my opinion, replace the need to verify for ourselves that everything functions as expected..
 
 ## Test everything
 
 ### Test Ingress
 
+Capture the external IP address of the Gateway:
+
+```shell
+export GW_IP=$(kubectl get gtw -n istio-ingress gateway \
+  -ojsonpath='{.status.addresses[0].value}')
+```
+
+Make a curl request to the ingress gateway using the configured hostname `bookinfo.exmaple.com`:
+
+```shell
+curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep title
+```
+
 ### Test authorization policies
+
+1. A request from an unauthorized workload to the `productpage` service should be denied:
+
+    ```shell
+    kubectl exec deploy/curl -n frontend -- \
+      curl -s --head productpage:9080/productpage
+    ```
+
+2. A request from an unauthorized workload to the `ratings` service should be denied:
+
+    ```shell
+    kubectl exec deploy/curl -n frontend -- \
+      curl -s ratings.backend:9080/ratings/123
+    ```
+
+    It should produce a response saying `RBAC: access denied`.
+
+3. A request from an unauthorized workload to the `details` service should be denied:
+
+    ```shell
+    kubectl exec deploy/curl -n frontend -- \
+      curl -s details.backend:9080/details/123
+    ```
+
+4. A request through the ingress gateway to product page and upstream should succeed:
+
+    ```shell
+    curl -s --head bookinfo.example.com/productpage \
+      --resolve bookinfo.example.com:80:$GW_IP
+    ```
 
 ### Test traffic policy
 
+Verify that all requests are routed to `reviews-v3` by making repeated calls to `productpage`:
+
+```shell
+curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
+```
+
 ## Summary
+
+We are running in ambient mode, and our mesh policies continue to function.
+
+From a resource consumption point of view, we are now running a single waypoint, compared to one per pod back when we were running in sidecar mode.
