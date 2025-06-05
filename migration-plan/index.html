@@ -8,11 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://eitansuez.github.io/ambient-migration/migrate/">
+        <link rel="canonical" href="https://eitansuez.github.io/ambient-migration/migration-plan/">
       
       
-        <link rel="prev" href="../migration-plan/">
+        <link rel="prev" href="../setup/">
       
+      
+        <link rel="next" href="../migrate/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +22,7 @@
     
     
       
-        <title>Migrate to Ambient - Migrating from Sidecars to Ambient Mesh</title>
+        <title>Migration plan - Migrating from Sidecars to Ambient Mesh</title>
       
     
     
@@ -70,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#migrate-to-ambient" class="md-skip">
+        <a href="#migration-plan" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Migrate to Ambient
+              Migration plan
             
           </span>
         </div>
@@ -289,28 +291,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../migration-plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Migration plan
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -323,7 +303,155 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Migration plan
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migration plan
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#where-do-we-need-waypoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where do we need Waypoints?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-many-waypoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      How many waypoints?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      The plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-istio-to-ambient-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade Istio to ambient mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-waypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy the waypoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrofit-authorization-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrofit authorization policies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-the-workloads-to-be-part-of-the-ambient-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch the workloads to be part of the ambient mesh
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-migration-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      The migration tool
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migrate/" class="md-nav__link">
         
   
   
@@ -334,7 +462,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -359,6 +486,107 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#where-do-we-need-waypoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where do we need Waypoints?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-many-waypoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      How many waypoints?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      The plan
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The plan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-istio-to-ambient-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade Istio to ambient mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-waypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy the waypoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrofit-authorization-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrofit authorization policies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-the-workloads-to-be-part-of-the-ambient-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch the workloads to be part of the ambient mesh
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-migration-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      The migration tool
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -376,7 +604,48 @@
   
 
 
-<h1 id="migrate-to-ambient">Migrate to Ambient</h1>
+<h1 id="migration-plan">Migration plan</h1>
+<p>Fundamentally, moving to ambient means removing all of our sidecars and replacing them with a combination of layer 4 and layer 7 proxies.
+See the <a href="https://istio.io/latest/docs/ambient/overview/">ambient overview in the Istio docs</a> for more information.</p>
+<p>The layer 4 proxies are a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/">DaemonSet</a> known as ztunnel, while the layer 7 components are known as waypoints.
+Unlike sidecars, waypoints are optional (installed as needed) and deployed separately from your workloads.
+Operationally, this is an advantage, as the platform networking concerns are in no way coupled to your deployments.</p>
+<p>Some ambient installations may not even require any waypoints, in situations where all mesh policies remain at layer 4.</p>
+<h2 id="analysis">Analysis</h2>
+<h3 id="where-do-we-need-waypoints">Where do we need Waypoints?</h3>
+<p>We must triage our mesh policies in terms of which do and do not require layer 7 proxies in order to function.</p>
+<p>For example, of the three Authorization policies we have in place, the one for the <code>productpage</code> service is purely layer 4.  On the other hand, the authorization policies for the <code>ratings</code> and <code>details</code> services require an evaluation of the HTTP method (GET or POST), and so require a waypoint.</p>
+<p>The traffic policy that governs how requests are routed to the <code>reviews</code> service also requires a waypoint, since we are performing HTTP routing.</p>
+<p>We come to the conclusion thhen that the <code>productpage</code> service does not require a waypoint.
+On the other hand, the backend services do, either to support their layer 7 authorization policies (<code>ratings</code> and <code>details</code>), or to support their traffic policies (<code>reviews</code>).</p>
+<h3 id="how-many-waypoints">How many waypoints?</h3>
+<p>Another decision that must be made is whether to dedicate a waypoint for each service, or whether we can use a single Waypoint to proxy multiple services.</p>
+<p>In this specific scenario, all of these backend services are related, and it makes sense to consider deploying a single waypoint responsible for all three.</p>
+<p>This pattern of using a single waypoint per namespace is often a perfect middle-ground between too many waypoints (one per service, as in sidecar mode), and too few waypoints (a single monolithic waypoint for way too many services).</p>
+<h2 id="the-plan">The plan</h2>
+<h3 id="upgrade-istio-to-ambient-mode">Upgrade Istio to ambient mode</h3>
+<p>Upgrading Istio to run in ambient mode entails two specific actions:</p>
+<ul>
+<li>Upgrade the existing Helm releases to run in ambient mode (<code>--set profile=ambient</code>).</li>
+<li>Install the missing ztunnel component.</li>
+</ul>
+<h3 id="deploy-the-waypoint">Deploy the waypoint</h3>
+<p>After the upgrade to ambient mode is a good time to provision the waypoint that will proxy our backend services.</p>
+<h3 id="retrofit-authorization-policies">Retrofit authorization policies</h3>
+<p>Our AuthorizationPolicies will not function in ambient mode in their current form.
+Per <a href="https://istio.io/latest/docs/ambient/usage/l7-features/#considerations">Considerations for authorization policies</a>, the policies must have a <code>targetRefs</code> which attaches them to their waypoint.</p>
+<p>We will derive a new set of ambient-compatible authorization policies and apply them in advance of switching to ambient mode.</p>
+<h3 id="switch-the-workloads-to-be-part-of-the-ambient-mesh">Switch the workloads to be part of the ambient mesh</h3>
+<p>We will replace sidecar injection with making the workloads a part of the ambient mesh.
+Istio has <a href="https://istio.io/latest/docs/ambient/usage/add-workloads/">distinct conventions</a> for each, by labeling workloads, or more idiomaticlaly their namespaces.</p>
+<p>This switch will necessitate a final restart of the workloads in order to remove their sidecars.</p>
+<h2 id="the-migration-tool">The migration tool</h2>
+<p>Even with a migration plan in place, it's important to have our migration supported by tools which inspect our environment and give us the feedback we need to make sure we haven't left anything out.</p>
+<p>Solo.io publishes a comprehensive <a href="https://ambientmesh.io/#migrate-from-sidecars">migration tool</a> that we will use, by running it multiple times during the migration process in order to get the feedback necessary to know that we remain on the right track.</p>
+<p>The tool goes as far as even producing transformed policies that are compatible with ambient mesh, saving us the effort of doing that work by hand.
+It's also a great way to avoid performing certain steps manually, which are error-prone.</p>
+<p>The tool will help us validate where we stand during the migration process, and that we have completed our migration and not left out any steps.</p>
+<p>If we forget to perform a step, the tool will remind us of the fact.</p>
 
 
 
@@ -412,7 +681,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../migration-plan/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Migration plan">
+          <a href="../setup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Setup">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -422,11 +691,27 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Migration plan
+                Setup
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../migrate/" class="md-footer__link md-footer__link--next" aria-label="Next: Migrate to Ambient">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Migrate to Ambient
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
