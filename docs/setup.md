@@ -1,4 +1,4 @@
-# Initial Setup
+# Setup
 
 The objective of this activity is to construct an initial state, where:
 

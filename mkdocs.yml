@@ -17,6 +17,7 @@ nav:
 - index.md
 - pre-analysis.md
 - setup.md
+- migration-plan.md
 - migrate.md
 markdown_extensions:
 - admonition
