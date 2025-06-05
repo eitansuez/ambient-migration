@@ -442,6 +442,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#assistant-whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assistant, what's next?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#deploy-the-waypoint" class="md-nav__link">
     <span class="md-ellipsis">
       Deploy the waypoint
@@ -626,6 +635,15 @@
   <a href="#migration-assistant-whats-next" class="md-nav__link">
     <span class="md-ellipsis">
       Migration assistant, what's next?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assistant-whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assistant, what's next?
     </span>
   </a>
   
@@ -852,7 +870,71 @@
 <p>In ambient mode, sidecar workloads must be have the HBONE protocol enabled in order to communicate with sidecarless workloads.</p>
 <p>In order to effect that change, the assistant instructs us to restart the pods that represent our workloads.</p>
 <p>This is a good example of a step that we hadn't considered in our plan.</p>
+<p>In scenarios where we expect to run a mix of workloads, some sidecar-based and others sidecarless, this step would be important.</p>
+<p>Go ahead and heed the recommendation by restarting the workloads:</p>
+<p><div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+And:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>frontend
+</span></code></pre></div>
+<p>Note that the above are still running sidecars.</p>
+<h2 id="assistant-whats-next">Assistant, what's next?</h2>
+<p>You know the drill by now:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
+</span></code></pre></div>
+<p>Here is the salient output:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">• Starting phase deploy-waypoints...</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">⚠ Phase deploy-waypoints has recommendations!</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">  🔮 Namespace &quot;backend&quot; might require a waypoint for the following services:</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="go">     * Service &quot;backend/details&quot; selected workload apps/v1/Deployment/backend/details-v1 requires a waypoint:</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="go">         AuthorizationPolicy backend/details-authz requires a waypoint due to HTTP attributes (methods)</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">     * Service &quot;backend/details-v1&quot; selected workload apps/v1/Deployment/backend/details-v1 requires a waypoint:</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="go">         AuthorizationPolicy backend/details-authz requires a waypoint due to HTTP attributes (methods)</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="go">     * Service &quot;backend/ratings&quot; selected workload apps/v1/Deployment/backend/ratings-v1 requires a waypoint:</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="go">         AuthorizationPolicy backend/ratings-authz requires a waypoint due to HTTP attributes (methods)</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="go">     * Service &quot;backend/ratings-v1&quot; selected workload apps/v1/Deployment/backend/ratings-v1 requires a waypoint:</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="go">         AuthorizationPolicy backend/ratings-authz requires a waypoint due to HTTP attributes (methods)</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="go">  ℹ Generated waypoints written to /tmp/istio-migrate/recommended-waypoints.yaml</span>
+</span></code></pre></div>
+<p>The assistant has validated our analysis that:</p>
+<ul>
+<li>The authorization policies on backend services require a waypoint.</li>
+<li>The authorization policy on frontend services do not necessitate a waypoint.</li>
+</ul>
+<p>It's interesting that it hasn't determined that <code>reviews</code> needs a waypoint too, on account of its traffic policy.</p>
+<p>On the other hand, it's awfully nice to see a generated waypoint provided by the assistant:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>cat<span class="w"> </span>/tmp/istio-migrate/recommended-waypoints.yaml
+</span></code></pre></div>
+<p>Here is the generated waypoint, it's a Gateway resource:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gateway.networking.k8s.io/v1</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Gateway</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">waypoint</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">  </span><span class="nt">gatewayClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">istio-waypoint</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">  </span><span class="nt">listeners</span><span class="p">:</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mesh</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15008</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">    </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HBONE</span>
+</span></code></pre></div>
 <h2 id="deploy-the-waypoint">Deploy the waypoint</h2>
+<p>Apply the recommended waypoint:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>/tmp/istio-migrate/recommended-waypoints.yaml
+</span></code></pre></div>
+<p>Note however that just applying the waypoint does not also bind it to specific workloads.</p>
+<p>Verify that the waypoint is present in the <code>backend</code> namespace:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>istioctl<span class="w"> </span>waypoint<span class="w"> </span>list<span class="w"> </span>-n<span class="w"> </span>backend
+</span></code></pre></div>
+<p>Here is the output:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">NAME         REVISION     PROGRAMMED</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="go">waypoint     default      True</span>
+</span></code></pre></div>
 <h2 id="apply-retrofitted-authorization-policies">Apply retrofitted authorization policies</h2>
 <h2 id="switch-to-ambient-mode">Switch to ambient mode</h2>
 <h2 id="test-everything">Test everything</h2>
