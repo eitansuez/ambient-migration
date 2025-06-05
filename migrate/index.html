@@ -323,6 +323,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Migrate to Ambient
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -334,6 +347,181 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#download-the-migration-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download the migration tool
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-the-migration-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Try the migration tool
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-istio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade Istio
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrade Istio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-the-cni-to-use-the-ambient-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade the CNI to use the ambient profile:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-istiod-with-the-ambient-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade istiod with the ambient profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-ztunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install ztunnel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-the-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate the upgrade
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-assistant-whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration assistant, what's next?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-waypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy the waypoint
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-retrofitted-authorization-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply retrofitted authorization policies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#switch-to-ambient-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch to ambient mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test everything
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test everything">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-ingress" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Ingress
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-authorization-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test authorization policies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-traffic-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test traffic policy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -359,6 +547,170 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#download-the-migration-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download the migration tool
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-the-migration-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Try the migration tool
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-istio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade Istio
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrade Istio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-the-cni-to-use-the-ambient-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade the CNI to use the ambient profile:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-istiod-with-the-ambient-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Upgrade istiod with the ambient profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-ztunnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install ztunnel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-the-upgrade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate the upgrade
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-assistant-whats-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration assistant, what's next?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-the-waypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy the waypoint
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-retrofitted-authorization-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apply retrofitted authorization policies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#switch-to-ambient-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Switch to ambient mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test everything
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test everything">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-ingress" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Ingress
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-authorization-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test authorization policies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-traffic-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test traffic policy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -377,6 +729,137 @@
 
 
 <h1 id="migrate-to-ambient">Migrate to Ambient</h1>
+<h2 id="download-the-migration-tool">Download the migration tool</h2>
+<p>Per the <a href="https://ambientmesh.io/docs/setup/sidecar-migration/#download-the-migration-helper">documented instructions</a>, we can obtain the migration helper with:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-sL<span class="w"> </span>https://storage.googleapis.com/gloo-cli/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</span></code></pre></div>
+<p>The output tells us that we can add the <code>gloo</code> binary to our path with:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/.gloo/bin:<span class="nv">$PATH</span>
+</span></code></pre></div>
+<p>The command comes with different options flag, but the general form of the command we will run is:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
+</span></code></pre></div>
+<h2 id="try-the-migration-tool">Try the migration tool</h2>
+<p>Try the migration helper now:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
+</span></code></pre></div>
+<p>Study the output:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">• Starting phase pre-reqs...</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">✅ Phase pre-reqs succeeded!</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">  ✅ Cluster CNI compatibility: passed</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">  ✅ Istio version compatibility: passed</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">  ✅ Multicluster usage compatibility: passed</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">  ✅ Virtual Machine usage compatibility: passed</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">  ✅ SPIRE usage compatibility: passed</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">• Starting phase cluster-setup...</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">❌ Phase cluster-setup failed!</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">  ❌ Ambient mode enabled: failed. 1 error occurred:</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="go">        * istiod istio-system/istiod must have &#39;PILOT_ENABLE_AMBIENT=true&#39;. Upgrade Istio with &#39;--set profile=ambient&#39;.</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="go">  ❌ DaemonSets deployed: failed. 1 error occurred:</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">        * ztunnel not found</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="go">  ❌ Sidecars support ambient mode: failed. 7 errors occurred:</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="go">        * Sidecar backend/details-v1-7d775cb4f6-s657b is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="go">        * Sidecar backend/ratings-v1-5b896f8544-h7qw6 is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="go">        * Sidecar backend/reviews-v1-746f96c9d4-55wxl is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="go">        * Sidecar backend/reviews-v2-97bdf5876-r5kg9 is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="go">        * Sidecar backend/reviews-v3-77d9db6844-fbwf6 is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="go">        * Sidecar frontend/curl-5b549b49b8-xthm5 is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="go">        * Sidecar frontend/productpage-v1-85b8f8d74b-tsw5q is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="go">  ✅ Required CRDs installed: passed</span>
+</span></code></pre></div>
+<p>This output should begin to provide a validation for our plan:</p>
+<ul>
+<li>
+<p>Among other things, it validates Istio version and Cluster CNI compatibility.  If we had used too old a version of Istio, the tool would have raised a concern, and our first priority would be to ugprade Istio to a newer version.</p>
+</li>
+<li>
+<p>We also get a validation that all necessary CRDs are installed.  I assume the reference is to the Gateway API CRDs.</p>
+</li>
+</ul>
+<p>The tool also helps us look forward and tells us what's not yet in place:</p>
+<ul>
+<li>We haven't yet upgraded to ambient mode.  We're told to use the <code>--set profile=ambient</code> flag.</li>
+<li>ztunnel is not yet installed</li>
+</ul>
+<p>Let's get to work.</p>
+<h2 id="upgrade-istio">Upgrade Istio</h2>
+<h3 id="upgrade-the-cni-to-use-the-ambient-profile">Upgrade the CNI to use the ambient profile:</h3>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>istio-cni<span class="w"> </span>istio/cni<span class="w"> </span>-n<span class="w"> </span>istio-system<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>--set<span class="w"> </span>global.platform<span class="o">=</span>k3d<span class="w"> </span>--set<span class="w"> </span><span class="nv">profile</span><span class="o">=</span>ambient<span class="w"> </span>--wait
+</span></code></pre></div>
+<h3 id="upgrade-istiod-with-the-ambient-profile">Upgrade <code>istiod</code> with the ambient profile</h3>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>istiod<span class="w"> </span>istio/istiod<span class="w"> </span>-n<span class="w"> </span>istio-system<span class="w"> </span>--set<span class="w"> </span><span class="nv">profile</span><span class="o">=</span>ambient<span class="w"> </span>--wait
+</span></code></pre></div>
+<h3 id="install-ztunnel">Install ztunnel</h3>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>helm<span class="w"> </span>install<span class="w"> </span>ztunnel<span class="w"> </span>istio/ztunnel<span class="w"> </span>-n<span class="w"> </span>istio-system<span class="w"> </span>--set<span class="w"> </span>global.platform<span class="o">=</span>k3d<span class="w"> </span>--wait
+</span></code></pre></div>
+<h3 id="validate-the-upgrade">Validate the upgrade</h3>
+<p>List all Helm installations:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>helm<span class="w"> </span>ls<span class="w"> </span>-A
+</span></code></pre></div>
+<p>The output should corroborate that all components are installed, along with their versions.</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">istio-base      istio-system    1               2025-06-04 15:01:02.654247 +0700 +07    deployed        base-1.26.1     1.26.1</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">istio-cni       istio-system    2               2025-06-05 11:34:51.192029 +0700 +07    deployed        cni-1.26.1      1.26.1</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">istiod          istio-system    2               2025-06-05 11:34:59.327015 +0700 +07    deployed        istiod-1.26.1   1.26.1</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">ztunnel         istio-system    1               2025-06-05 11:35:38.388524 +0700 +07    deployed        ztunnel-1.26.1  1.26.1</span>
+</span></code></pre></div>
+<p>Next, list all pods in the <code>istio-system</code> namespace:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>istio-system
+</span></code></pre></div>
+<p>The output should indicate that the CNI agent, <code>ztunnel</code>, and <code>istiod</code> are all running:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">NAME                      READY   STATUS    RESTARTS   AGE</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="go">istio-cni-node-wsld7      1/1     Running   0          2m25s</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">istiod-86849665c6-87lvg   1/1     Running   0          2m17s</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="go">ztunnel-zkzn8             1/1     Running   0          99s</span>
+</span></code></pre></div>
+<h2 id="migration-assistant-whats-next">Migration assistant, what's next?</h2>
+<p>This is a good time to re-run the migration tool to see where we stand:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
+</span></code></pre></div>
+<p>The output has changed:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">• Starting phase pre-reqs...</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">✅ Phase pre-reqs succeeded!</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">  ✅ Cluster CNI compatibility: passed</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">  ✅ Istio version compatibility: passed</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">  ✅ Multicluster usage compatibility: passed</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">  ✅ Virtual Machine usage compatibility: passed</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">  ✅ SPIRE usage compatibility: passed</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="go">• Starting phase cluster-setup...</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="go">❌ Phase cluster-setup failed!</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="go">  ✅ Ambient mode enabled: passed</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="go">  ✅ DaemonSets deployed: passed</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="go">  ❌ Sidecars support ambient mode: failed. 7 errors occurred:</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="go">        * Sidecar backend/details-v1-7d775cb4f6-s657b is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="go">        * Sidecar backend/ratings-v1-5b896f8544-h7qw6 is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="go">        * Sidecar backend/reviews-v1-746f96c9d4-55wxl is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="go">        * Sidecar backend/reviews-v2-97bdf5876-r5kg9 is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="go">        * Sidecar backend/reviews-v3-77d9db6844-fbwf6 is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="go">        * Sidecar frontend/curl-5b549b49b8-xthm5 is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="go">        * Sidecar frontend/productpage-v1-85b8f8d74b-tsw5q is missing &#39;ENABLE_HBONE&#39;. Upgrade Istio with &#39;--set profile=ambient&#39; and restart the pod.</span>
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="go">  ✅ Required CRDs installed: passed</span>
+</span></code></pre></div>
+<p>In ambient mode, sidecar workloads must be have the HBONE protocol enabled in order to communicate with sidecarless workloads.</p>
+<p>In order to effect that change, the assistant instructs us to restart the pods that represent our workloads.</p>
+<p>This is a good example of a step that we hadn't considered in our plan.</p>
+<h2 id="deploy-the-waypoint">Deploy the waypoint</h2>
+<h2 id="apply-retrofitted-authorization-policies">Apply retrofitted authorization policies</h2>
+<h2 id="switch-to-ambient-mode">Switch to ambient mode</h2>
+<h2 id="test-everything">Test everything</h2>
+<h3 id="test-ingress">Test Ingress</h3>
+<h3 id="test-authorization-policies">Test authorization policies</h3>
+<h3 id="test-traffic-policy">Test traffic policy</h3>
+<h2 id="summary">Summary</h2>
 
 
 
