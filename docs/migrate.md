@@ -374,6 +374,68 @@ kubectl get pod -n frontend
 kubectl get pod -n backend
 ```
 
+The `istioctl` CLI also provides `ztunnel-config` commands to verify the traffic traveling through ztunnel and waypoint proxies, and assigned workload identity certificates:
+
+1. Verify that workloads use the HBONE protocol:
+
+    ```shell
+    istioctl ztunnel-config workload
+    ```
+
+    ```console
+    NAMESPACE     POD NAME                                ADDRESS      NODE                    WAYPOINT PROTOCOL
+    backend       details-v1-76cb4f574f-nqhtw             10.42.0.40   k3d-my-cluster-server-0 None     HBONE
+    backend       ratings-v1-5bf4c88c5c-qbnq5             10.42.0.39   k3d-my-cluster-server-0 None     HBONE
+    backend       reviews-v1-6899c69cc5-zqmbb             10.42.0.43   k3d-my-cluster-server-0 None     HBONE
+    backend       reviews-v2-74dd9df8fc-2z62b             10.42.0.42   k3d-my-cluster-server-0 None     HBONE
+    backend       reviews-v3-5598c69cc5-8jzld             10.42.0.41   k3d-my-cluster-server-0 None     HBONE
+    backend       waypoint-56f487d8f8-q9qpk               10.42.0.44   k3d-my-cluster-server-0 None     TCP
+    frontend      curl-678c94dfbb-bqwph                   10.42.0.37   k3d-my-cluster-server-0 None     HBONE
+    frontend      productpage-v1-5bf9bf9f89-w6k5m         10.42.0.38   k3d-my-cluster-server-0 None     HBONE
+    ```
+
+2. Verify the services associated with the waypoint in the `backend` namespace:
+
+    ```shell
+    istioctl ztunnel-config service
+    ```
+
+    ```console
+    NAMESPACE     SERVICE NAME   SERVICE VIP   WAYPOINT ENDPOINTS
+    backend       details        10.43.87.252  waypoint 1/1
+    backend       details-v1     10.43.121.191 waypoint 1/1
+    backend       ratings        10.43.18.135  waypoint 1/1
+    backend       ratings-v1     10.43.154.253 waypoint 1/1
+    backend       reviews        10.43.176.233 waypoint 3/3
+    backend       reviews-v1     10.43.135.223 waypoint 1/1
+    backend       reviews-v2     10.43.73.229  waypoint 1/1
+    backend       reviews-v3     10.43.114.154 waypoint 1/1
+    backend       waypoint       10.43.41.47   None     1/1
+    frontend      curl           10.43.65.249  None     1/1
+    frontend      productpage    10.43.70.80   None     1/1
+    istio-ingress gateway-istio  10.43.246.228 None     1/1
+    ```
+
+3. Verify that all workloads are assigned workload identities:
+
+    ```shell
+    istioctl ztunnel-config certificate
+    ```
+
+    ```console
+    CERTIFICATE NAME                                               TYPE     STATUS        VALID CERT     SERIAL NUMBER                        NOT AFTER                NOT BEFORE
+    spiffe://cluster.local/ns/backend/sa/bookinfo-details          Leaf     Available     true           f0bc69c12ed191f83365b2297890f248     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z
+    spiffe://cluster.local/ns/backend/sa/bookinfo-details          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z
+    spiffe://cluster.local/ns/backend/sa/bookinfo-ratings          Leaf     Available     true           9f4722ba68e73146fa5c498fcacb5270     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z
+    spiffe://cluster.local/ns/backend/sa/bookinfo-ratings          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z
+    spiffe://cluster.local/ns/backend/sa/bookinfo-reviews          Leaf     Available     true           8ad4912f768ac3f986e8d0014947af5a     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z
+    spiffe://cluster.local/ns/backend/sa/bookinfo-reviews          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z
+    spiffe://cluster.local/ns/frontend/sa/bookinfo-productpage     Leaf     Available     true           49cd2a29fb479144ee898135a71c4ab9     2025-06-06T04:54:16Z     2025-06-05T04:52:16Z
+    spiffe://cluster.local/ns/frontend/sa/bookinfo-productpage     Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z
+    spiffe://cluster.local/ns/frontend/sa/curl                     Leaf     Available     true           ffe564539de3ecccdbe4d53ef6230f05     2025-06-06T04:54:16Z     2025-06-05T04:52:16Z
+    spiffe://cluster.local/ns/frontend/sa/curl                     Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z
+    ```
+
 ## Assistant, one more time
 
 ```shell
