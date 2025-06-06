@@ -10,6 +10,8 @@ The objective of this activity is to construct an initial state, where:
 
 ![Diagram](diagram.png)
 
+You will find all referenced artifacts in the [accompanying GitHub repository](https://github.com/eitansuez/ambient-migration).
+
 ## Provisioning a Kubernetes cluster
 
 Feel free to provision a Kubernetes cluster of your choice, locally or in the cloud.
@@ -211,7 +213,7 @@ You will apply three AuthorizationPolicy resources that establish the following 
 Furthermore:
 
 1. The first policy will be a layer 4 policy that is concerned strictly with workload identity.
-2. The remaining policies have layer 7 aspects that allows only specific HTTP methods (for example, GET or POST).
+2. The remaining policies have layer 7 aspects that allow only specific HTTP methods (for example, GET or POST).
 
 Review all three policies:
 

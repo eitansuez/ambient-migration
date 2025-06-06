@@ -24,6 +24,6 @@ An advantage of performing this migration is gaining the ability to provision ga
 
 In the next section, as we install Istio in sidecar mode, we opt to install the Istio CNI.
 
-Similarily, when configuring gateways and defining traffic policy, we opt for the newer Gateway API.
+Similarly, when configuring gateways and defining traffic policy, we opt for the newer Gateway API.
 
 Both decisions will put us in the position to focus on the migration to sidecarless without having to deal with these additional concerns.

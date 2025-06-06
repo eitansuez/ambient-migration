@@ -64,7 +64,7 @@ Study the output:
 
 This output should begin to provide a validation for our plan:
 
-- Among other things, it validates Istio version and Cluster CNI compatibility.  If we had used too old a version of Istio, the tool would have raised a concern, and our first priority would be to ugprade Istio to a newer version.
+- Among other things, it validates Istio version and Cluster CNI compatibility.  If we had used too old a version of Istio, the tool would have raised a concern, and our first priority would be to upgrade Istio to a newer version.
 
 - We also get a validation that all necessary CRDs are installed.  I assume the reference is to the Gateway API CRDs.
 
@@ -165,7 +165,7 @@ The output has changed:
   ✅ Required CRDs installed: passed
 ```
 
-In ambient mode, sidecar workloads must be have the HBONE protocol enabled in order to communicate with sidecarless workloads.
+In ambient mode, sidecar workloads must have the HBONE protocol enabled in order to communicate with sidecarless workloads.
 
 In order to effect that change, the assistant instructs us to restart the pods that represent our workloads.
 
@@ -302,7 +302,7 @@ Rather than do the work ourselves, the tool has provided the resources in the fi
 
 ## Apply retrofitted authorization policies
 
-It's worth mentioned that we are not yet deleting any existing authoriation policies.
+It's worth mentioned that we are not yet deleting any existing authorization policies.
 Rather, we add the equivalent policies that will function in the context of the waypoints.
 
 ```shell
@@ -451,7 +451,7 @@ Here is the output:
   🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend ratings-authz
 ```
 
-The only task remaining it appears, is to remove the now redundant, original authorization policies for `details` and `ratings` services.
+The only task remaining, it appears, is to remove the now redundant, original authorization policies for `details` and `ratings` services.
 
 Make it so:
 

@@ -53,7 +53,7 @@ We will derive a new set of ambient-compatible authorization policies and apply 
 ### Switch the workloads to be part of the ambient mesh
 
 We will replace sidecar injection with making the workloads a part of the ambient mesh.
-Istio has [distinct conventions](https://istio.io/latest/docs/ambient/usage/add-workloads/) for each, by labeling workloads, or more idiomaticlaly their namespaces.
+Istio has [distinct conventions](https://istio.io/latest/docs/ambient/usage/add-workloads/) for each, by labeling workloads, or more idiomatically their namespaces.
 
 This switch will necessitate a final restart of the workloads in order to remove their sidecars.
 
