@@ -637,7 +637,7 @@ Per <a href="https://istio.io/latest/docs/ambient/usage/l7-features/#considerati
 <p>We will derive a new set of ambient-compatible authorization policies and apply them in advance of switching to ambient mode.</p>
 <h3 id="switch-the-workloads-to-be-part-of-the-ambient-mesh">Switch the workloads to be part of the ambient mesh</h3>
 <p>We will replace sidecar injection with making the workloads a part of the ambient mesh.
-Istio has <a href="https://istio.io/latest/docs/ambient/usage/add-workloads/">distinct conventions</a> for each, by labeling workloads, or more idiomaticlaly their namespaces.</p>
+Istio has <a href="https://istio.io/latest/docs/ambient/usage/add-workloads/">distinct conventions</a> for each, by labeling workloads, or more idiomatically their namespaces.</p>
 <p>This switch will necessitate a final restart of the workloads in order to remove their sidecars.</p>
 <h2 id="the-migration-tool">The migration tool</h2>
 <p>Even with a migration plan in place, it's important to have our migration supported by tools which inspect our environment and give us the feedback we need to make sure we haven't left anything out.</p>

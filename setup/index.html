@@ -704,6 +704,7 @@
 <li>A traffic policy is in place that routes all requests for the <code>reviews</code> service to the <code>reviews-v3</code> workload.</li>
 </ol>
 <p><img alt="Diagram" src="../diagram.png" /></p>
+<p>You will find all referenced artifacts in the <a href="https://github.com/eitansuez/ambient-migration">accompanying GitHub repository</a>.</p>
 <h2 id="provisioning-a-kubernetes-cluster">Provisioning a Kubernetes cluster</h2>
 <p>Feel free to provision a Kubernetes cluster of your choice, locally or in the cloud.</p>
 <p>The following snippet installs a local Kubernetes cluster with k3d.  For more information, see <a href="https://istio.io/latest/docs/setup/platform-setup/k3d/">here</a>.</p>
@@ -911,7 +912,7 @@
 <p>Furthermore:</p>
 <ol>
 <li>The first policy will be a layer 4 policy that is concerned strictly with workload identity.</li>
-<li>The remaining policies have layer 7 aspects that allows only specific HTTP methods (for example, GET or POST).</li>
+<li>The remaining policies have layer 7 aspects that allow only specific HTTP methods (for example, GET or POST).</li>
 </ol>
 <p>Review all three policies:</p>
 <div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">productpage-authz.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
