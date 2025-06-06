@@ -268,7 +268,7 @@ NAME         REVISION     PROGRAMMED
 waypoint     default      True
 ```
 
-## Assistant..?
+## Back to the Assistant
 
 Re-run the assistant:
 

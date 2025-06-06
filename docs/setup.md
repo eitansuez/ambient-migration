@@ -8,6 +8,8 @@ The objective of this activity is to construct an initial state, where:
 4. A set of L4 and L7 authorization policies are in place and functioning.
 5. A traffic policy is in place that routes all requests for the `reviews` service to the `reviews-v3` workload.
 
+![Diagram](diagram.png)
+
 ## Provisioning a Kubernetes cluster
 
 Feel free to provision a Kubernetes cluster of your choice, locally or in the cloud.
