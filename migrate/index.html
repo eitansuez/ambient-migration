@@ -1083,6 +1083,11 @@ Rather, we add the equivalent policies that will function in the context of the 
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>/tmp/istio-migrate/recommended-policies.yaml
 </span></code></pre></div>
 <p>A close look at the recommended policies shows that the tool is doing its due diligence to permit requests that target either the <code>ratings</code> and <code>ratings-v1</code> services, and similarly for the <code>details</code> and <code>details-v1</code> services.</p>
+<p>A closer look at the recommended policies reveals two things:</p>
+<ol>
+<li>The recommended policies include L4 authorization policies explicitly allowing the waypoint to communicate with the target service (<code>details</code>, <code>ratings</code>).</li>
+<li>The tool is doing its due diligence to permit requests that target either the <code>ratings</code> and <code>ratings-v1</code> services, and similarly for the <code>details</code> and <code>details-v1</code> services.</li>
+</ol>
 <h2 id="bind-the-waypoint-to-the-services">Bind the waypoint to the services</h2>
 <p>Another run of the assistant points this out:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">• Starting phase use-waypoints...</span>
