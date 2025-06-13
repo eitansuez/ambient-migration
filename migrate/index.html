@@ -1085,7 +1085,7 @@ Rather, we add the equivalent policies that will function in the context of the 
 <p>A close look at the recommended policies shows that the tool is doing its due diligence to permit requests that target either the <code>ratings</code> and <code>ratings-v1</code> services, and similarly for the <code>details</code> and <code>details-v1</code> services.</p>
 <p>A closer look at the recommended policies reveals two things:</p>
 <ol>
-<li>The recommended policies include L4 authorization policies explicitly allowing the waypoint to communicate with the target service (<code>details</code>, <code>ratings</code>).</li>
+<li>The recommended policies include L4 authorization policies explicitly allowing the waypoint to communicate with the target service (<code>details</code>, <code>ratings</code>).  This is technically not required for the system to function, but it ensures that only the waypoint can communicate with the service (i.e. that no client bypasses the waypoint).</li>
 <li>The tool is doing its due diligence to permit requests that target either the <code>ratings</code> and <code>ratings-v1</code> services, and similarly for the <code>details</code> and <code>details-v1</code> services.</li>
 </ol>
 <h2 id="bind-the-waypoint-to-the-services">Bind the waypoint to the services</h2>
