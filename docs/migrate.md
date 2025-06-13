@@ -311,6 +311,11 @@ kubectl apply -f /tmp/istio-migrate/recommended-policies.yaml
 
 A close look at the recommended policies shows that the tool is doing its due diligence to permit requests that target either the `ratings` and `ratings-v1` services, and similarly for the `details` and `details-v1` services.
 
+A closer look at the recommended policies reveals two things:
+
+1. The recommended policies include L4 authorization policies explicitly allowing the waypoint to communicate with the target service (`details`, `ratings`).
+2. The tool is doing its due diligence to permit requests that target either the `ratings` and `ratings-v1` services, and similarly for the `details` and `details-v1` services.
+
 ## Bind the waypoint to the services
 
 Another run of the assistant points this out:
