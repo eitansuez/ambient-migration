@@ -313,7 +313,7 @@ A close look at the recommended policies shows that the tool is doing its due di
 
 A closer look at the recommended policies reveals two things:
 
-1. The recommended policies include L4 authorization policies explicitly allowing the waypoint to communicate with the target service (`details`, `ratings`).
+1. The recommended policies include L4 authorization policies explicitly allowing the waypoint to communicate with the target service (`details`, `ratings`).  This is technically not required for the system to function, but it ensures that only the waypoint can communicate with the service (i.e. that no client bypasses the waypoint).
 2. The tool is doing its due diligence to permit requests that target either the `ratings` and `ratings-v1` services, and similarly for the `details` and `details-v1` services.
 
 ## Bind the waypoint to the services
