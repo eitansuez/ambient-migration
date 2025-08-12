@@ -152,7 +152,7 @@ We opt for the latter.
 Install the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) standard channel CRDs:
 
 ```shell
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml
 ```
 
 Create the namespace where the Gateway is to be provisioned:
