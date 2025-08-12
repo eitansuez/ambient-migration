@@ -284,7 +284,7 @@ When `productpage` makes requests against the `reviews` service, the requests ar
 Verify this by making several requests to the `productpage` service and "grepping" for the keyword "reviews-":
 
 ```shell
-curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
+curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep -m 1 "reviews-"
 ```
 
 Review the following traffic policy which will route all requests to `reviews-v3`:
