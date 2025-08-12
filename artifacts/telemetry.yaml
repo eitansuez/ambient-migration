@@ -1,0 +1,11 @@
+---
+apiVersion: telemetry.istio.io/v1
+kind: Telemetry
+metadata:
+  name: enable-cluster-wide-waypoint-logging
+  namespace: istio-system
+spec:
+  accessLogging:
+    - providers:
+        - name: envoy
+      # No filter.expression, logs all access events
