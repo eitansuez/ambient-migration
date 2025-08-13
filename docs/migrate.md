@@ -563,15 +563,6 @@ Verify that all requests are routed to `reviews-v3` by making repeated calls to 
 curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
 ```
 
-Here is a convenient command to periodically calls the productpage service through the gateway:
-
-```bash
-while true; do
-  curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep -m 1 'reviews-'
-  sleep 0.5
-done
-```
-
 ## Summary
 
 We are running in ambient mode, and our mesh policies continue to function.

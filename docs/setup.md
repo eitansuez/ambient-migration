@@ -287,6 +287,15 @@ Verify this by making several requests to the `productpage` service and "greppin
 curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep -m 1 "reviews-"
 ```
 
+Here is a convenient command to periodically call `productpage` through the gateway:
+
+```bash
+while true; do
+  curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep -m 1 'reviews-'
+  sleep 0.5
+done
+```
+
 Review the following traffic policy which will route all requests to `reviews-v3`:
 
 ```yaml title="route-reviews-v3.yaml" linenums="1"
@@ -304,7 +313,7 @@ kubectl apply -f artifacts/route-reviews-v3.yaml -n backend
 Verify that all requests are routed to `reviews-v3` by making repeated calls to `productpage`:
 
 ```shell
-curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
+curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep -m 1 "reviews-"
 ```
 
 ## Summary
