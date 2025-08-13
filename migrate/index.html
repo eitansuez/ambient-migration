@@ -1304,12 +1304,6 @@ Since in this case all workloads in <code>backend</code> should be enrolled to u
 <p>Verify that all requests are routed to <code>reviews-v3</code> by making repeated calls to <code>productpage</code>:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;reviews-&quot;</span>
 </span></code></pre></div>
-<p>Here is a convenient command to periodically calls the productpage service through the gateway:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-</span><span id="__span-53-2"><a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-m<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s1">&#39;reviews-&#39;</span>
-</span><span id="__span-53-3"><a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">0</span>.5
-</span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="k">done</span>
-</span></code></pre></div>
 <h2 id="summary">Summary</h2>
 <p>We are running in ambient mode, and our mesh policies continue to function.</p>
 <p>From a resource consumption point of view, we are now running a single waypoint, compared to one per pod back when we were running in sidecar mode.</p>
