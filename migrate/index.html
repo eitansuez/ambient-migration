@@ -457,6 +457,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Deploy the waypoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#turn-on-access-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Turn on access logging
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -715,6 +730,21 @@
       Deploy the waypoint
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Deploy the waypoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#turn-on-access-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Turn on access logging
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1058,23 +1088,52 @@ And:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">NAME         REVISION     PROGRAMMED</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">waypoint     default      True</span>
 </span></code></pre></div>
+<h3 id="turn-on-access-logging">Turn on access logging</h3>
+<p>The Telemetry API allows us to enable access logging:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">telemetry.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="nn">---</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">telemetry.istio.io/v1</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Telemetry</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="nt">metadata</span><span class="p">:</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enable-cluster-wide-waypoint-logging</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">istio-system</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="w">  </span><span class="nt">accessLogging</span><span class="p">:</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">providers</span><span class="p">:</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">envoy</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Apply the resource:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>artifacts/telemetry.yaml
+</span></code></pre></div>
+<p>This will give us the ability to view traffic transiting the waypoint through its logs.</p>
+<p>Here is the command to tail the waypoint logs:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>--follow<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>deploy/waypoint
+</span></code></pre></div>
 <h2 id="back-to-the-assistant">Back to the Assistant</h2>
 <p>Re-run the assistant:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
 </span></code></pre></div>
 <p>Study the output:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">...</span>
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="go">• Starting phase migrate-policies...</span>
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">⚠ Phase migrate-policies has recommendations!</span>
-</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-from-waypoint: v1/Service/backend/details must allow traffic from its waypoint.</span>
-</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-details-authz: Existing configuration is copied from policy backend/details-authz to be enforced at the waypoint.</span>
-</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-v1-from-waypoint: v1/Service/backend/details-v1 must allow traffic from its waypoint.</span>
-</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-v1-details-authz: Existing configuration is copied from policy backend/details-authz to be enforced at the waypoint.</span>
-</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-from-waypoint: v1/Service/backend/ratings must allow traffic from its waypoint.</span>
-</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-ratings-authz: Existing configuration is copied from policy backend/ratings-authz to be enforced at the waypoint.</span>
-</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-v1-from-waypoint: v1/Service/backend/ratings-v1 must allow traffic from its waypoint.</span>
-</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-v1-ratings-authz: Existing configuration is copied from policy backend/ratings-authz to be enforced at the waypoint.</span>
-</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="go">  ℹ Recommended policies written to /tmp/istio-migrate/recommended-policies.yaml</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="go">...</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="go">• Starting phase migrate-policies...</span>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="go">⚠ Phase migrate-policies has recommendations!</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-from-waypoint: v1/Service/backend/details must allow traffic from its waypoint.</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-details-authz: Existing configuration is copied from policy backend/details-authz to be enforced at the waypoint.</span>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-v1-from-waypoint: v1/Service/backend/details-v1 must allow traffic from its waypoint.</span>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/details-v1-details-authz: Existing configuration is copied from policy backend/details-authz to be enforced at the waypoint.</span>
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-from-waypoint: v1/Service/backend/ratings must allow traffic from its waypoint.</span>
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-ratings-authz: Existing configuration is copied from policy backend/ratings-authz to be enforced at the waypoint.</span>
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-v1-from-waypoint: v1/Service/backend/ratings-v1 must allow traffic from its waypoint.</span>
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="go">  🔮 Apply security.istio.io/v1/AuthorizationPolicy/backend/ratings-v1-ratings-authz: Existing configuration is copied from policy backend/ratings-authz to be enforced at the waypoint.</span>
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="go">  ℹ Recommended policies written to /tmp/istio-migrate/recommended-policies.yaml</span>
 </span></code></pre></div>
 <p>We get a mention that the waypoint will be used for specific backend services.
 We make a mental note of that.</p>
@@ -1083,7 +1142,7 @@ We make a mental note of that.</p>
 <h2 id="apply-retrofitted-authorization-policies">Apply retrofitted authorization policies</h2>
 <p>It's worth mentioned that we are not yet deleting any existing authorization policies.
 Rather, we add the equivalent policies that will function in the context of the waypoints.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>/tmp/istio-migrate/recommended-policies.yaml
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>/tmp/istio-migrate/recommended-policies.yaml
 </span></code></pre></div>
 <p>A close look at the recommended policies shows that the tool is doing its due diligence to permit requests that target either the <code>ratings</code> and <code>ratings-v1</code> services, and similarly for the <code>details</code> and <code>details-v1</code> services.</p>
 <p>A closer look at the recommended policies reveals two things:</p>
@@ -1093,157 +1152,163 @@ Rather, we add the equivalent policies that will function in the context of the 
 </ol>
 <h2 id="bind-the-waypoint-to-the-services">Bind the waypoint to the services</h2>
 <p>Another run of the assistant points this out:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">• Starting phase use-waypoints...</span>
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="go">⚠ Phase use-waypoints has recommendations!</span>
-</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">  ⚠ Waypoint backend/waypoint is not used by any services.</span>
-</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="go">  🔮 Service v1/Service/backend/details requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend details istio.io/use-waypoint=waypoint</span>
-</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="go">  🔮 Service v1/Service/backend/details-v1 requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend details-v1 istio.io/use-waypoint=waypoint</span>
-</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="go">  🔮 Service v1/Service/backend/ratings requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend ratings istio.io/use-waypoint=waypoint</span>
-</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="go">  🔮 Service v1/Service/backend/ratings-v1 requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend ratings-v1 istio.io/use-waypoint=waypoint</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">• Starting phase use-waypoints...</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="go">⚠ Phase use-waypoints has recommendations!</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">  ⚠ Waypoint backend/waypoint is not used by any services.</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">  🔮 Service v1/Service/backend/details requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend details istio.io/use-waypoint=waypoint</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="go">  🔮 Service v1/Service/backend/details-v1 requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend details-v1 istio.io/use-waypoint=waypoint</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="go">  🔮 Service v1/Service/backend/ratings requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend ratings istio.io/use-waypoint=waypoint</span>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="go">  🔮 Service v1/Service/backend/ratings-v1 requires a waypoint, but is not configured to use one. To configure it: kubectl label service -n backend ratings-v1 istio.io/use-waypoint=waypoint</span>
 </span></code></pre></div>
 <p>It suggests binding the waypoint to our services by labeling each service with the <code>istio.io/use-waypoint</code> conventional label.</p>
 <p>Here we know that in addition to <code>ratings</code> and <code>details</code>, we must also label <code>reviews</code> services to use the waypoint, in order to support the traffic policy that is in place for <code>reviews</code>.</p>
 <p>It seems silly to label every single service in the <code>backend</code> namespace.
 Since in this case all workloads in <code>backend</code> should be enrolled to use the waypoint, let's just label the namespace:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio.io/use-waypoint<span class="o">=</span>waypoint
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio.io/use-waypoint<span class="o">=</span>waypoint
 </span></code></pre></div>
 <p>Re-run the assistant to validate that all services have the associated waypoint.</p>
 <h2 id="switch-to-ambient-mode">Switch to ambient mode</h2>
 <p>It's time to finally switch to ambient mode.</p>
 <h3 id="migrate-the-backend">Migrate the backend</h3>
 <p>Remove the sidecar injection label:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio-injection-
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio-injection-
 </span></code></pre></div>
 <p>Replace it with the <code>dataplane-mode=ambient</code> label (ensures that ztunnel intercepts traffic in and out of our workloads):</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio.io/dataplane-mode<span class="o">=</span>ambient
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>backend<span class="w"> </span>istio.io/dataplane-mode<span class="o">=</span>ambient
 </span></code></pre></div>
 <p>Restart the backend deployments to remove the sidecars:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>details-v1
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>ratings-v1
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>reviews-v1
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>reviews-v2
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>reviews-v3
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>details-v1
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>ratings-v1
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>reviews-v1
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>reviews-v2
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>reviews-v3
 </span></code></pre></div>
 <h3 id="migrate-the-frontend">Migrate the frontend</h3>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>frontend<span class="w"> </span>istio-injection-
-</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>frontend<span class="w"> </span>istio.io/dataplane-mode<span class="o">=</span>ambient
-</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>frontend
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>frontend<span class="w"> </span>istio-injection-
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>kubectl<span class="w"> </span>label<span class="w"> </span>namespace<span class="w"> </span>frontend<span class="w"> </span>istio.io/dataplane-mode<span class="o">=</span>ambient
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>frontend
 </span></code></pre></div>
 <h3 id="validate">Validate</h3>
 <p>Verify that all pods in <code>frontend</code> and <code>backend</code> have a single container:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>frontend
-</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>backend
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>frontend
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-n<span class="w"> </span>backend
 </span></code></pre></div>
 <p>The <code>istioctl</code> CLI also provides <code>ztunnel-config</code> commands to verify the traffic traveling through ztunnel and waypoint proxies, and assigned workload identity certificates:</p>
 <ol>
 <li>
 <p>Verify that workloads use the HBONE protocol:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>istioctl<span class="w"> </span>ztunnel-config<span class="w"> </span>workload
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>istioctl<span class="w"> </span>ztunnel-config<span class="w"> </span>workload
 </span></code></pre></div>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">NAMESPACE     POD NAME                                ADDRESS      NODE                    WAYPOINT PROTOCOL</span>
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="go">backend       details-v1-76cb4f574f-nqhtw             10.42.0.40   k3d-my-cluster-server-0 None     HBONE</span>
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">backend       ratings-v1-5bf4c88c5c-qbnq5             10.42.0.39   k3d-my-cluster-server-0 None     HBONE</span>
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="go">backend       reviews-v1-6899c69cc5-zqmbb             10.42.0.43   k3d-my-cluster-server-0 None     HBONE</span>
-</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="go">backend       reviews-v2-74dd9df8fc-2z62b             10.42.0.42   k3d-my-cluster-server-0 None     HBONE</span>
-</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="go">backend       reviews-v3-5598c69cc5-8jzld             10.42.0.41   k3d-my-cluster-server-0 None     HBONE</span>
-</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">backend       waypoint-56f487d8f8-q9qpk               10.42.0.44   k3d-my-cluster-server-0 None     TCP</span>
-</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">frontend      curl-678c94dfbb-bqwph                   10.42.0.37   k3d-my-cluster-server-0 None     HBONE</span>
-</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">frontend      productpage-v1-5bf9bf9f89-w6k5m         10.42.0.38   k3d-my-cluster-server-0 None     HBONE</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">NAMESPACE     POD NAME                                ADDRESS      NODE                    WAYPOINT PROTOCOL</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="go">backend       details-v1-76cb4f574f-nqhtw             10.42.0.40   k3d-my-cluster-server-0 None     HBONE</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">backend       ratings-v1-5bf4c88c5c-qbnq5             10.42.0.39   k3d-my-cluster-server-0 None     HBONE</span>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="go">backend       reviews-v1-6899c69cc5-zqmbb             10.42.0.43   k3d-my-cluster-server-0 None     HBONE</span>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="go">backend       reviews-v2-74dd9df8fc-2z62b             10.42.0.42   k3d-my-cluster-server-0 None     HBONE</span>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="go">backend       reviews-v3-5598c69cc5-8jzld             10.42.0.41   k3d-my-cluster-server-0 None     HBONE</span>
+</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="go">backend       waypoint-56f487d8f8-q9qpk               10.42.0.44   k3d-my-cluster-server-0 None     TCP</span>
+</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="go">frontend      curl-678c94dfbb-bqwph                   10.42.0.37   k3d-my-cluster-server-0 None     HBONE</span>
+</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="go">frontend      productpage-v1-5bf9bf9f89-w6k5m         10.42.0.38   k3d-my-cluster-server-0 None     HBONE</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>Verify the services associated with the waypoint in the <code>backend</code> namespace:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>istioctl<span class="w"> </span>ztunnel-config<span class="w"> </span>service
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>istioctl<span class="w"> </span>ztunnel-config<span class="w"> </span>service
 </span></code></pre></div>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">NAMESPACE     SERVICE NAME   SERVICE VIP   WAYPOINT ENDPOINTS</span>
-</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="go">backend       details        10.43.87.252  waypoint 1/1</span>
-</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">backend       details-v1     10.43.121.191 waypoint 1/1</span>
-</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="go">backend       ratings        10.43.18.135  waypoint 1/1</span>
-</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">backend       ratings-v1     10.43.154.253 waypoint 1/1</span>
-</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="go">backend       reviews        10.43.176.233 waypoint 3/3</span>
-</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="go">backend       reviews-v1     10.43.135.223 waypoint 1/1</span>
-</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="go">backend       reviews-v2     10.43.73.229  waypoint 1/1</span>
-</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="go">backend       reviews-v3     10.43.114.154 waypoint 1/1</span>
-</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="go">backend       waypoint       10.43.41.47   None     1/1</span>
-</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="go">frontend      curl           10.43.65.249  None     1/1</span>
-</span><span id="__span-37-12"><a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="go">frontend      productpage    10.43.70.80   None     1/1</span>
-</span><span id="__span-37-13"><a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="go">istio-ingress gateway-istio  10.43.246.228 None     1/1</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">NAMESPACE     SERVICE NAME   SERVICE VIP   WAYPOINT ENDPOINTS</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="go">backend       details        10.43.87.252  waypoint 1/1</span>
+</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="go">backend       details-v1     10.43.121.191 waypoint 1/1</span>
+</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="go">backend       ratings        10.43.18.135  waypoint 1/1</span>
+</span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="go">backend       ratings-v1     10.43.154.253 waypoint 1/1</span>
+</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="go">backend       reviews        10.43.176.233 waypoint 3/3</span>
+</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="go">backend       reviews-v1     10.43.135.223 waypoint 1/1</span>
+</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="go">backend       reviews-v2     10.43.73.229  waypoint 1/1</span>
+</span><span id="__span-40-9"><a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="go">backend       reviews-v3     10.43.114.154 waypoint 1/1</span>
+</span><span id="__span-40-10"><a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="go">backend       waypoint       10.43.41.47   None     1/1</span>
+</span><span id="__span-40-11"><a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a><span class="go">frontend      curl           10.43.65.249  None     1/1</span>
+</span><span id="__span-40-12"><a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a><span class="go">frontend      productpage    10.43.70.80   None     1/1</span>
+</span><span id="__span-40-13"><a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a><span class="go">istio-ingress gateway-istio  10.43.246.228 None     1/1</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>Verify that all workloads are assigned workload identities:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>istioctl<span class="w"> </span>ztunnel-config<span class="w"> </span>certificate
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>istioctl<span class="w"> </span>ztunnel-config<span class="w"> </span>certificate
 </span></code></pre></div>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">CERTIFICATE NAME                                               TYPE     STATUS        VALID CERT     SERIAL NUMBER                        NOT AFTER                NOT BEFORE</span>
-</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-details          Leaf     Available     true           f0bc69c12ed191f83365b2297890f248     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z</span>
-</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-details          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
-</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-ratings          Leaf     Available     true           9f4722ba68e73146fa5c498fcacb5270     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z</span>
-</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-ratings          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
-</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-reviews          Leaf     Available     true           8ad4912f768ac3f986e8d0014947af5a     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z</span>
-</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-reviews          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
-</span><span id="__span-39-8"><a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="go">spiffe://cluster.local/ns/frontend/sa/bookinfo-productpage     Leaf     Available     true           49cd2a29fb479144ee898135a71c4ab9     2025-06-06T04:54:16Z     2025-06-05T04:52:16Z</span>
-</span><span id="__span-39-9"><a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a><span class="go">spiffe://cluster.local/ns/frontend/sa/bookinfo-productpage     Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
-</span><span id="__span-39-10"><a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a><span class="go">spiffe://cluster.local/ns/frontend/sa/curl                     Leaf     Available     true           ffe564539de3ecccdbe4d53ef6230f05     2025-06-06T04:54:16Z     2025-06-05T04:52:16Z</span>
-</span><span id="__span-39-11"><a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a><span class="go">spiffe://cluster.local/ns/frontend/sa/curl                     Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">CERTIFICATE NAME                                               TYPE     STATUS        VALID CERT     SERIAL NUMBER                        NOT AFTER                NOT BEFORE</span>
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-details          Leaf     Available     true           f0bc69c12ed191f83365b2297890f248     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z</span>
+</span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-details          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
+</span><span id="__span-42-4"><a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-ratings          Leaf     Available     true           9f4722ba68e73146fa5c498fcacb5270     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z</span>
+</span><span id="__span-42-5"><a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-ratings          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
+</span><span id="__span-42-6"><a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-reviews          Leaf     Available     true           8ad4912f768ac3f986e8d0014947af5a     2025-06-06T04:54:09Z     2025-06-05T04:52:09Z</span>
+</span><span id="__span-42-7"><a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a><span class="go">spiffe://cluster.local/ns/backend/sa/bookinfo-reviews          Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
+</span><span id="__span-42-8"><a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a><span class="go">spiffe://cluster.local/ns/frontend/sa/bookinfo-productpage     Leaf     Available     true           49cd2a29fb479144ee898135a71c4ab9     2025-06-06T04:54:16Z     2025-06-05T04:52:16Z</span>
+</span><span id="__span-42-9"><a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a><span class="go">spiffe://cluster.local/ns/frontend/sa/bookinfo-productpage     Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
+</span><span id="__span-42-10"><a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a><span class="go">spiffe://cluster.local/ns/frontend/sa/curl                     Leaf     Available     true           ffe564539de3ecccdbe4d53ef6230f05     2025-06-06T04:54:16Z     2025-06-05T04:52:16Z</span>
+</span><span id="__span-42-11"><a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a><span class="go">spiffe://cluster.local/ns/frontend/sa/curl                     Root     Available     true           c4cc571dc92335d57cb6cf3ab78f99a8     2035-06-02T08:05:55Z     2025-06-04T08:05:55Z</span>
 </span></code></pre></div>
 </li>
 </ol>
 <h2 id="assistant-one-more-time">Assistant, one more time</h2>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
 </span></code></pre></div>
 <p>Here is the output:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">• Starting phase policy-simplification...</span>
-</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="go">⚠ Phase policy-simplification has recommendations!</span>
-</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">  🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend details-authz</span>
-</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="go">  🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend ratings-authz</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="go">• Starting phase policy-simplification...</span>
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="go">⚠ Phase policy-simplification has recommendations!</span>
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">  🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend details-authz</span>
+</span><span id="__span-44-4"><a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="go">  🔮 AuthorizationPolicy is migrated and can be deleted: kubectl delete authorizationpolicies.security.istio.io -n backend ratings-authz</span>
 </span></code></pre></div>
 <p>The only task remaining, it appears, is to remove the now redundant, original authorization policies for <code>details</code> and <code>ratings</code> services.</p>
 <p>Make it so:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>authorizationpolicies.security.istio.io<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>details-authz
-</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>authorizationpolicies.security.istio.io<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>ratings-authz
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>authorizationpolicies.security.istio.io<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>details-authz
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>authorizationpolicies.security.istio.io<span class="w"> </span>-n<span class="w"> </span>backend<span class="w"> </span>ratings-authz
 </span></code></pre></div>
 <p>Finally, <code>gloo ambient migrate</code> should return "all-green" output.</p>
 <p>But this does not, in my opinion, replace the need to verify for ourselves that everything functions as expected..</p>
 <h2 id="test-everything">Test everything</h2>
 <h3 id="test-ingress">Test Ingress</h3>
 <p>Capture the external IP address of the Gateway:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GW_IP</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>gtw<span class="w"> </span>-n<span class="w"> </span>istio-ingress<span class="w"> </span>gateway<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">  </span>-ojsonpath<span class="o">=</span><span class="s1">&#39;{.status.addresses[0].value}&#39;</span><span class="k">)</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GW_IP</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>get<span class="w"> </span>gtw<span class="w"> </span>-n<span class="w"> </span>istio-ingress<span class="w"> </span>gateway<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">  </span>-ojsonpath<span class="o">=</span><span class="s1">&#39;{.status.addresses[0].value}&#39;</span><span class="k">)</span>
 </span></code></pre></div>
-<p>Make a curl request to the ingress gateway using the configured hostname <code>bookinfo.exmaple.com</code>:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>title
+<p>Make a curl request to the ingress gateway using the configured hostname <code>bookinfo.example.com</code>:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>title
 </span></code></pre></div>
 <h3 id="test-authorization-policies">Test authorization policies</h3>
 <ol>
 <li>
 <p>A request from an unauthorized workload to the <code>productpage</code> service should be denied:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>productpage:9080/productpage
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>productpage:9080/productpage
 </span></code></pre></div>
 </li>
 <li>
 <p>A request from an unauthorized workload to the <code>ratings</code> service should be denied:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>ratings.backend:9080/ratings/123
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>ratings.backend:9080/ratings/123
 </span></code></pre></div>
 <p>It should produce a response saying <code>RBAC: access denied</code>.</p>
 </li>
 <li>
 <p>A request from an unauthorized workload to the <code>details</code> service should be denied:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>details.backend:9080/details/123
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>deploy/curl<span class="w"> </span>-n<span class="w"> </span>frontend<span class="w"> </span>--<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>details.backend:9080/details/123
 </span></code></pre></div>
 </li>
 <li>
 <p>A request through the ingress gateway to product page and upstream should succeed:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="w">  </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>--head<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="w">  </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span>
 </span></code></pre></div>
 </li>
 </ol>
 <h3 id="test-traffic-policy">Test traffic policy</h3>
 <p>Verify that all requests are routed to <code>reviews-v3</code> by making repeated calls to <code>productpage</code>:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;reviews-&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;reviews-&quot;</span>
+</span></code></pre></div>
+<p>Here is a convenient command to periodically calls the productpage service through the gateway:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+</span><span id="__span-53-2"><a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>bookinfo.example.com/productpage<span class="w"> </span>--resolve<span class="w"> </span>bookinfo.example.com:80:<span class="nv">$GW_IP</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-m<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s1">&#39;reviews-&#39;</span>
+</span><span id="__span-53-3"><a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">0</span>.5
+</span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="k">done</span>
 </span></code></pre></div>
 <h2 id="summary">Summary</h2>
 <p>We are running in ambient mode, and our mesh policies continue to function.</p>
