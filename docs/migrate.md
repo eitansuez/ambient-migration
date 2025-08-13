@@ -353,27 +353,36 @@ Re-run the assistant to validate that all services have the associated waypoint.
 
 It's time to finally switch to ambient mode.
 
-### Remove the `istio-injection` labels
+### Migrate the backend
+
+Remove the sidecar injection label:
 
 ```shell
-kubectl label namespace frontend istio-injection-
 kubectl label namespace backend istio-injection-
 ```
 
-### Add the `dataplane-mode` label
+Replace it with the `dataplane-mode=ambient` label (ensures that ztunnel intercepts traffic in and out of our workloads):
 
 ```shell
-kubectl label namespace frontend istio.io/dataplane-mode=ambient
 kubectl label namespace backend istio.io/dataplane-mode=ambient
 ```
 
-This label will ensure that ztunnel intercepts traffic in and out of our workloads.
-
-We can finally remove the sidecars by restarting the workloads:
+Restart the backend deployments to remove the sidecars:
 
 ```shell
+kubectl rollout restart deploy -n backend details-v1
+kubectl rollout restart deploy -n backend ratings-v1
+kubectl rollout restart deploy -n backend reviews-v1
+kubectl rollout restart deploy -n backend reviews-v2
+kubectl rollout restart deploy -n backend reviews-v3
+```
+
+### Migrate the frontend
+
+```shell
+kubectl label namespace frontend istio-injection-
+kubectl label namespace frontend istio.io/dataplane-mode=ambient
 kubectl rollout restart deploy -n frontend
-kubectl rollout restart deploy -n backend
 ```
 
 ### Validate
