@@ -129,6 +129,14 @@ istiod-86849665c6-87lvg   1/1     Running   0          2m17s
 ztunnel-zkzn8             1/1     Running   0          99s
 ```
 
+### Solo.io's Istio distribution
+
+Solo.io's distribution of Istio provides sidecar to ambient interoperability that ensures that mesh policies continue to function in environments with mixed sidecar and sidecarless workloads, specifically in situations where services have been upgraded to ambient while sidecar clients remain.
+
+Solo.io's distribution ensures that requests to ambient services from these sidecar clients are routed through the waypoints that enforce authorization and other mesh policies.
+
+See [Solo distributions of Istio](https://docs.solo.io/gloo-mesh/latest/ambient/about/images/overview/) for more information.
+
 ## Migration assistant, what's next?
 
 This is a good time to re-run the migration tool to see where we stand:
