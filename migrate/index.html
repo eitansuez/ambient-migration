@@ -427,6 +427,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#soloios-istio-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solo.io's Istio distribution
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -696,6 +705,15 @@
   <a href="#validate-the-upgrade" class="md-nav__link">
     <span class="md-ellipsis">
       Validate the upgrade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soloios-istio-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solo.io's Istio distribution
     </span>
   </a>
   
@@ -988,6 +1006,10 @@
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">istiod-86849665c6-87lvg   1/1     Running   0          2m17s</span>
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="go">ztunnel-zkzn8             1/1     Running   0          99s</span>
 </span></code></pre></div>
+<h3 id="soloios-istio-distribution">Solo.io's Istio distribution</h3>
+<p>Solo.io's distribution of Istio provides sidecar to ambient interoperability that ensures that mesh policies continue to function in environments with mixed sidecar and sidecarless workloads, specifically in situations where services have been upgraded to ambient while sidecar clients remain.</p>
+<p>Solo.io's distribution ensures that requests to ambient services from these sidecar clients are routed through the waypoints that enforce authorization and other mesh policies.</p>
+<p>See <a href="https://docs.solo.io/gloo-mesh/latest/ambient/about/images/overview/">Solo distributions of Istio</a> for more information.</p>
 <h2 id="migration-assistant-whats-next">Migration assistant, what's next?</h2>
 <p>This is a good time to re-run the migration tool to see where we stand:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>gloo<span class="w"> </span>ambient<span class="w"> </span>migrate
