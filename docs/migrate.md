@@ -247,10 +247,16 @@ spec:
 
 ## Deploy the waypoint
 
-Apply the recommended waypoint:
+The waypoint can be deployed by applying the migration assistant's recommended manifest:
 
 ```shell
 kubectl apply -f /tmp/istio-migrate/recommended-waypoints.yaml
+```
+
+Alternatively, use the `istioctl waypoint apply` command, like so:
+
+```shell
+istioctl waypoint apply --namespace backend
 ```
 
 Note however that just applying the waypoint does not also bind it to specific workloads.
