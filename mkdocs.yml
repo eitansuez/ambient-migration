@@ -11,6 +11,7 @@ theme:
   - navigation.expand
   - content.code.annotate
   - content.code.copy
+  - content.tabs.link
   palette:
     primary: blue grey
 nav:

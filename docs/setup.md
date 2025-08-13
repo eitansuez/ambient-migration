@@ -138,7 +138,7 @@ kubectl exec deploy/curl -n frontend -- curl -s reviews.backend:9080/reviews/123
 Finally, call the `productpage` service:
 
 ```shell
- kubectl exec deploy/curl -n frontend -- curl -s productpage:9080/productpage | grep title
+kubectl exec deploy/curl -n frontend -- curl -s productpage:9080/productpage | grep title
 ```
 
 Make sure the calls succeed.

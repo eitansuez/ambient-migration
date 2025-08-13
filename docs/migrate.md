@@ -77,24 +77,63 @@ Let's get to work.
 
 ## Upgrade Istio
 
-### Upgrade the CNI to use the ambient profile:
+### Solo.io's Istio distribution
 
-```shell
-helm upgrade istio-cni istio/cni -n istio-system \
-  --set global.platform=k3d --set profile=ambient --wait
-```
+Solo.io's distribution of Istio provides sidecar to ambient interoperability that ensures that mesh policies continue to function in environments with mixed sidecar and sidecarless workloads, specifically in situations where services have been upgraded to ambient while sidecar clients remain.
+
+Solo.io's distribution ensures that requests to ambient services from these sidecar clients are routed through the waypoints that enforce authorization and other mesh policies.
+
+See [Solo distributions of Istio](https://docs.solo.io/gloo-mesh/latest/ambient/about/images/overview/) for more information.
+
+### Upgrade the CNI to use the ambient profile
+
+=== "OSS Istio"
+
+    ```shell
+    helm upgrade istio-cni istio/cni -n istio-system \
+      --set global.platform=k3d --set profile=ambient --wait
+    ```
+
+=== "Solo.io Distribution"
+
+    ```shell
+    helm upgrade istio-cni oci://$HELM_REPO/cni -n istio-system --version $TAG \
+      --set global.hub=$HUB --set global.tag=$TAG \
+      --set global.platform=k3d --set profile=ambient --wait
+    ```
 
 ### Upgrade `istiod` with the ambient profile
 
-```shell
-helm upgrade istiod istio/istiod -n istio-system --set profile=ambient --wait
-```
+=== "OSS Istio"
+
+    ```shell
+    helm upgrade istiod istio/istiod -n istio-system --set profile=ambient --wait
+    ```
+
+=== "Solo.io Distribution"
+
+    ```shell
+    helm upgrade istiod oci://$HELM_REPO/istiod -n istio-system --version $TAG \
+      --set global.hub=$HUB --set global.tag=$TAG \
+      --set profile=ambient \
+      --set license.value=$SOLO_LICENSE_KEY --wait
+    ```
 
 ### Install ztunnel
 
-```shell
-helm install ztunnel istio/ztunnel -n istio-system --set global.platform=k3d --wait
-```
+=== "OSS Istio"
+
+    ```shell
+    helm install ztunnel istio/ztunnel -n istio-system --set global.platform=k3d --wait
+    ```
+
+=== "Solo.io Distribution"
+
+    ```shell
+    helm install ztunnel oci://$HELM_REPO/ztunnel -n istio-system --version $TAG \
+      --set hub=$HUB --set tag=$TAG \
+      --set global.platform=k3d --set profile=ambient --wait
+    ```
 
 ### Validate the upgrade
 
@@ -128,14 +167,6 @@ istio-cni-node-wsld7      1/1     Running   0          2m25s
 istiod-86849665c6-87lvg   1/1     Running   0          2m17s
 ztunnel-zkzn8             1/1     Running   0          99s
 ```
-
-### Solo.io's Istio distribution
-
-Solo.io's distribution of Istio provides sidecar to ambient interoperability that ensures that mesh policies continue to function in environments with mixed sidecar and sidecarless workloads, specifically in situations where services have been upgraded to ambient while sidecar clients remain.
-
-Solo.io's distribution ensures that requests to ambient services from these sidecar clients are routed through the waypoints that enforce authorization and other mesh policies.
-
-See [Solo distributions of Istio](https://docs.solo.io/gloo-mesh/latest/ambient/about/images/overview/) for more information.
 
 ## Migration assistant, what's next?
 
@@ -568,7 +599,7 @@ curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_I
 Verify that all requests are routed to `reviews-v3` by making repeated calls to `productpage`:
 
 ```shell
-curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
+curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep -m 1 "reviews-"
 ```
 
 ## Summary
