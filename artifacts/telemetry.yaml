@@ -7,5 +7,4 @@ metadata:
 spec:
   accessLogging:
     - providers:
-        - name: envoy
-      # No filter.expression, logs all access events
+      - name: envoy

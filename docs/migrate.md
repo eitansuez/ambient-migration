@@ -274,6 +274,28 @@ NAME         REVISION     PROGRAMMED
 waypoint     default      True
 ```
 
+### Turn on access logging
+
+The Telemetry API allows us to enable access logging:
+
+```yaml title="telemetry.yaml" linenums="1"
+--8<-- "telemetry.yaml"
+```
+
+Apply the resource:
+
+```shell
+kubectl apply -f artifacts/telemetry.yaml
+```
+
+This will give us the ability to view traffic transiting the waypoint through its logs.
+
+Here is the command to tail the waypoint logs:
+
+```shell
+kubectl logs --follow -n backend deploy/waypoint
+```
+
 ## Back to the Assistant
 
 Re-run the assistant:
@@ -495,7 +517,7 @@ export GW_IP=$(kubectl get gtw -n istio-ingress gateway \
   -ojsonpath='{.status.addresses[0].value}')
 ```
 
-Make a curl request to the ingress gateway using the configured hostname `bookinfo.exmaple.com`:
+Make a curl request to the ingress gateway using the configured hostname `bookinfo.example.com`:
 
 ```shell
 curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep title
@@ -539,6 +561,15 @@ Verify that all requests are routed to `reviews-v3` by making repeated calls to 
 
 ```shell
 curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep "reviews-"
+```
+
+Here is a convenient command to periodically calls the productpage service through the gateway:
+
+```bash
+while true; do
+  curl -s bookinfo.example.com/productpage --resolve bookinfo.example.com:80:$GW_IP | grep -m 1 'reviews-'
+  sleep 0.5
+done
 ```
 
 ## Summary
